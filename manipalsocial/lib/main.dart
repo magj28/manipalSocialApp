@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'place_single.dart';
+import 'placeshomescreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +13,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Manipal Social',
-      home: PlaceSingle(),
+      home: PlacesHomeScreen(),
+      //home: PlaceSingle(),
     );
   }
 }
