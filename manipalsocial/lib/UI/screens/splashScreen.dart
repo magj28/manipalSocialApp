@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:manipalsocial/UI/screens/homepage.dart';
 import 'package:manipalsocial/UI/screens/placeSingle.dart';
+import 'package:manipalsocial/UI/screens/placesScreen.dart';
+import 'package:manipalsocial/UI/screens/profileScreen.dart';
 import 'package:manipalsocial/UI/screens/signUp.dart';
 import 'package:manipalsocial/logic/viewModels/userViewModel.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +12,7 @@ import 'package:splashscreen/splashscreen.dart';
 class Splash extends StatelessWidget {
   Widget decideScreen(authStatus) {
     if (authStatus == Status.Authenticated) {
-      return PlaceSingleScreen();
+      return ProfileScreen();
     } else if (authStatus == Status.Unauthenticated) {
       return SignUpScreen();
     } else {

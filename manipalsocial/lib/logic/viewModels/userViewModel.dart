@@ -13,6 +13,7 @@ class UserViewModel with ChangeNotifier {
   Status _status = Status.Uninitialized;
   User _user;
   String _jwtToken;
+  String _headers;
   bool _isFetchingData = false;
   String _errorMessage;
 
@@ -22,6 +23,7 @@ class UserViewModel with ChangeNotifier {
   String get jwtToken => _jwtToken;
   bool get isFetchingData => _isFetchingData;
   String get errorMessage => _errorMessage;
+  String get headers => _headers;
 
   UserViewModel.initialize() {
     checkLogIn();
@@ -30,6 +32,7 @@ class UserViewModel with ChangeNotifier {
   //setters
   setJwtToken(value) {
     _jwtToken = value;
+    _headers = "Bearer $_jwtToken";
     notifyListeners();
   }
 

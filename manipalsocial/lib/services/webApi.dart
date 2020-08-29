@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class WebApi {
-  final String url = "https://51cb7f218bc5.ngrok.io/";
+  final String url = "https://c9107e9f46ef.ngrok.io/";
   var networkError = {
     'success': false,
     'error': "Network Error.",
@@ -66,6 +66,36 @@ class WebApi {
         'message': json.decode(response.body)['message']
       };
       return userData;
+    } else {
+      print(response.body);
+      var error = {
+        'success': false,
+        'error': json.decode(response.body)['error'],
+        'message': json.decode(response.body)['message']
+      };
+      return error;
+    }
+  }
+
+  Future<dynamic> getPlaces(headers) async {
+    final apiUrl = url + 'places/list';
+    var response, responseStatus;
+    try {
+      response = await http.get(apiUrl, headers: {'Authorization': headers});
+      responseStatus = json.decode(response.body)['status'];
+    } catch (e) {
+      print(e);
+      return networkError;
+    }
+    if (response.statusCode == 200 && responseStatus == "success") {
+      var placeData = {
+        'success': true,
+        'clubs': json.decode(response.body)['data']['clubs'],
+        'resturants': json.decode(response.body)['data']['resturants'],
+        'beaches': json.decode(response.body)['data']['beaches'],
+        'message': json.decode(response.body)['message']
+      };
+      return placeData;
     } else {
       print(response.body);
       var error = {

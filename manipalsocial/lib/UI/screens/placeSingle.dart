@@ -1,37 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:manipalsocial/UI/widgets/pinkButton.dart';
+import 'package:manipalsocial/logic/models/Place.dart';
+import 'package:manipalsocial/logic/viewModels/placeViewModel.dart';
 import 'package:manipalsocial/logic/viewModels/userViewModel.dart';
 import 'package:provider/provider.dart';
 
-class Place {
-  String name;
-  String about;
-  String location;
-  String imageURL;
-  String specialInfo;
-  Place(
-      {this.name, this.about, this.imageURL, this.location, this.specialInfo});
-}
-
-Place place = Place(
-  name: "Malpe Beach",
-  about:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  location:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  specialInfo:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-  imageURL:
-      "https://www.trawell.in/admin/images/upload/932329381MalpeBeach_Main.jpg",
-);
-
 class PlaceSingleScreen extends StatelessWidget {
-  // double _width;
   @override
   Widget build(BuildContext context) {
-    // _width = MediaQuery.of(context).size.width;
-
+    Place place = Provider.of<PlaceViewModel>(context).singlePlace;
     return Scaffold(
       backgroundColor: Color(0xff131132),
       appBar: AppBar(
@@ -48,6 +26,7 @@ class PlaceSingleScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.all(5),
@@ -55,7 +34,7 @@ class PlaceSingleScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0),
                   child: Center(
                     child: Image.network(
-                      place.imageURL,
+                      place.imageUrl,
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -85,16 +64,16 @@ class PlaceSingleScreen extends StatelessWidget {
                 thickness: 1,
                 color: Color(0xffFC2E7E),
               ),
-              PinkButton(
-                buttonText: 'Logout',
-                onPress: () {
-                  Provider.of<UserViewModel>(context, listen: false).logOut();
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, '/', (route) => false);
-                },
-              ),
-              _infoColumn(place.name, place.about),
-              _infoColumn('Where', place.location),
+              // PinkButton(
+              //   buttonText: 'Logout',
+              //   onPress: () {
+              //     Provider.of<UserViewModel>(context, listen: false).logOut();
+              //     Navigator.pushNamedAndRemoveUntil(
+              //         context, '/', (route) => false);
+              //   },
+              // ),
+              _infoColumn(place.name, place.what),
+              _infoColumn('Where', place.where),
               _infoColumn('Trivia', place.specialInfo),
               Padding(
                 padding: EdgeInsets.all(10.0),
