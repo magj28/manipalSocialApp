@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
-import 'place_single.dart';
-import 'placeshomescreen.dart';
+import 'package:manipalsocial/UI/screens/loginScreen.dart';
+import 'package:manipalsocial/UI/screens/placeSingle.dart';
+import 'package:manipalsocial/UI/screens/signUp.dart';
+import 'package:manipalsocial/UI/screens/splashScreen.dart';
+import 'package:manipalsocial/logic/viewModels/userViewModel.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider.value(value: UserViewModel.initialize())
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -13,8 +20,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Manipal Social',
-      home: PlacesHomeScreen(),
-      //home: PlaceSingle(),
+      theme: ThemeData(accentColor: Color(0xffFC2E7E)),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Splash(),
+        '/signUp': (context) => SignUpScreen(),
+        '/login': (context) => LoginScreen(),
+        '/placeSingle': (context) => PlaceSingleScreen(),
+      },
     );
   }
 }
