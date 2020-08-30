@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:manipalsocial/logic/models/Place.dart';
+import 'package:manipalsocial/logic/viewModels/userViewModel.dart';
 import 'package:manipalsocial/services/webApi.dart';
 
 class PlaceViewModel with ChangeNotifier {
   //making instace of web api to use their function
   WebApi api = WebApi();
+  UserViewModel user = UserViewModel();
 
   List<Place> _clubs = List<Place>();
   List<Place> _resturants = List<Place>();
@@ -55,7 +57,7 @@ class PlaceViewModel with ChangeNotifier {
     for (int i = 0; i < resturants.length; i++) {
       _resturants.add(Place.fromJson(resturants[i]));
     }
-    for (int i = 0; i < clubs.length; i++) {
+    for (int i = 0; i < beaches.length; i++) {
       _beaches.add(Place.fromJson(beaches[i]));
     }
     notifyListeners();

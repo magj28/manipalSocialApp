@@ -6,6 +6,7 @@ import 'package:manipalsocial/services/webApi.dart';
 enum Status { Uninitialized, Authenticated, Unauthenticated }
 
 class UserViewModel with ChangeNotifier {
+  UserViewModel();
   //making instace of web api and storage services to use their function
   WebApi api = WebApi();
   StorageService storage = StorageService();

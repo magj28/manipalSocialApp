@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:manipalsocial/UI/widgets/pinkButton.dart';
 import 'package:manipalsocial/logic/models/Place.dart';
 import 'package:manipalsocial/logic/viewModels/placeViewModel.dart';
-import 'package:manipalsocial/logic/viewModels/userViewModel.dart';
 import 'package:provider/provider.dart';
 
 class PlaceSingleScreen extends StatelessWidget {

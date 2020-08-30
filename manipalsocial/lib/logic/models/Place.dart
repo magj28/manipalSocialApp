@@ -21,6 +21,6 @@ class Place {
         where = json['where'],
         imageUrl = json['imageUrl'],
         specialInfo = json['specialInfo'],
-        latitude = json['coordinates'][0],
-        longitude = json['coordinates'][1];
+        latitude = double.parse(json['coordinates'][0]),
+        longitude = double.parse(json['coordinates'][1]);
 }

@@ -9,15 +9,26 @@ class HomePage extends StatelessWidget {
     return Center(
       child: Container(
         color: Colors.white,
-        child: FlatButton(
-          onPressed: () {
-            String headers =
-                Provider.of<UserViewModel>(context, listen: false).headers;
-            Provider.of<PlaceViewModel>(context, listen: false)
-                .getPlaces(headers);
-            Navigator.pushNamed(context, '/place');
-          },
-          child: Text('get places'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FlatButton(
+              onPressed: () {
+                String headers =
+                    Provider.of<UserViewModel>(context, listen: false).headers;
+                Provider.of<PlaceViewModel>(context, listen: false)
+                    .getPlaces(headers);
+                Navigator.pushNamed(context, '/place');
+              },
+              child: Text('get places'),
+            ),
+            FlatButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/profile');
+              },
+              child: Text('Profile'),
+            ),
+          ],
         ),
       ),
     );
