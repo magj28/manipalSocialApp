@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:manipalsocial/UI/screens/cabShareScreen.dart';
+import 'package:manipalsocial/UI/screens/homeScreen.dart';
 import 'package:manipalsocial/UI/screens/loginScreen.dart';
 import 'package:manipalsocial/UI/screens/placeSingle.dart';
 import 'package:manipalsocial/UI/screens/placesScreen.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => Splash(),
+        '/home': (context) => HomeScreen(),
         '/signUp': (context) => SignUpScreen(),
         '/login': (context) => LoginScreen(),
         '/placeSingle': (context) => PlaceSingleScreen(),

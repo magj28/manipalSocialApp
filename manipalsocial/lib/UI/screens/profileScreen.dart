@@ -73,8 +73,8 @@ class ProfileScreen extends StatelessWidget {
             SizedBox(
               height: 20.0,
             ),
-            InfoCard(user.email, 'email'),
-            InfoCard('+91 ${user.phoneNumber}', 'phone'),
+            InfoCard(user.email, 'email', ''),
+            InfoCard('+91 ${user.phoneNumber}', 'phone', ''),
             SizedBox(
               height: 30.0,
             ),

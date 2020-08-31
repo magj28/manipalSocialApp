@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:manipalsocial/UI/widgets/infoCard.dart';
 import 'package:manipalsocial/UI/widgets/pinkButton.dart';
 
 DateTime selectedDate;
@@ -34,76 +35,98 @@ class _CarPageState extends State<CarPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Container(
-                child: Center(child: Image.asset('assets/images/cab.png')),
-              ),
-              Divider(
-                thickness: 2,
-                color: Colors.white,
-                indent: 50,
-                endIndent: 50,
-              ),
-              Container(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      "Want to share cab ?",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        ToAndFrom('Manipal'),
-                        ToAndFrom('Manipal'),
-                      ],
-                    ),
-                    PinkButton(
-                        buttonText: 'Pick Date',
-                        onPress: () {
-                          DatePicker.showDatePicker(context,
-                              showTitleActions: true,
-                              minTime: DateTime.now(),
-                              maxTime: DateTime(2030, 10, 7),
-                              theme: DatePickerTheme(
-                                backgroundColor: Color(0xff1D1D3E),
-                                cancelStyle: TextStyle(
-                                  color: Color(0xff1B90CE),
-                                ),
-                                itemStyle: TextStyle(color: Colors.white),
-                              ), onConfirm: (date) {
-                            DatePicker.showTime12hPicker(context,
-                                showTitleActions: true,
-                                theme: DatePickerTheme(
-                                    backgroundColor: Color(0xff1D1D3E),
-                                    cancelStyle: TextStyle(
-                                      color: Color(0xff1B90CE),
-                                    ),
-                                    itemStyle: TextStyle(color: Colors.white)),
-                                onConfirm: (date) {
-                              selectedDate = date;
-                              print(selectedDate);
-                            }, currentTime: DateTime.now());
-                          },
-                              currentTime: DateTime.now(),
-                              locale: LocaleType.en);
-                        }),
-                    PinkButton(buttonText: 'Search', onPress: () {}),
-                  ],
+                child: Center(
+                  child: CircleAvatar(
+                    radius: 80,
+                    backgroundImage: AssetImage('assets/images/cab.png'),
+                  ),
                 ),
               ),
               Divider(
-                thickness: 2,
-                color: Colors.white,
+                thickness: 1,
+                color: Color(0xffFC2E7E),
+                indent: 50,
+                endIndent: 50,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Want to share cab ?",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('From',
+                          style: TextStyle(
+                              color: Color(0xff1B90CE), fontSize: 20)),
+                      ToAndFrom(
+                        'Manipal',
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Text('To',
+                          style: TextStyle(
+                              color: Color(0xff1B90CE), fontSize: 20)),
+                      ToAndFrom('Manipal'),
+                    ],
+                  )
+                ],
+              ),
+              PinkButton(
+                  buttonText: 'Pick Date',
+                  onPress: () {
+                    DatePicker.showDatePicker(context,
+                        showTitleActions: true,
+                        minTime: DateTime.now(),
+                        maxTime: DateTime(2030, 10, 7),
+                        theme: DatePickerTheme(
+                          backgroundColor: Color(0xff1D1D3E),
+                          cancelStyle: TextStyle(
+                            color: Color(0xff1B90CE),
+                          ),
+                          itemStyle: TextStyle(color: Colors.white),
+                        ), onConfirm: (date) {
+                      DatePicker.showTime12hPicker(context,
+                          showTitleActions: true,
+                          theme: DatePickerTheme(
+                              backgroundColor: Color(0xff1D1D3E),
+                              cancelStyle: TextStyle(
+                                color: Color(0xff1B90CE),
+                              ),
+                              itemStyle: TextStyle(color: Colors.white)),
+                          onConfirm: (date) {
+                        selectedDate = date;
+                        print(selectedDate);
+                      }, currentTime: DateTime.now());
+                    }, currentTime: DateTime.now(), locale: LocaleType.en);
+                  }),
+              PinkButton(buttonText: 'Search', onPress: () {}),
+              SizedBox(
+                height: 10,
+              ),
+              Divider(
+                thickness: 1,
+                color: Color(0xffFC2E7E),
                 indent: 50,
                 endIndent: 50,
               ),
               Text(
-                "Available Drivers",
+                "Contact them for Cab Sharing",
                 style: TextStyle(
-                    color: Colors.white,
+                    color: Color(0xff1B90CE),
                     fontWeight: FontWeight.bold,
                     letterSpacing: 2,
                     fontSize: 20),
@@ -111,10 +134,40 @@ class _CarPageState extends State<CarPage> {
               ListView(
                 shrinkWrap: true,
                 children: <Widget>[
-                  MyCard("DRIVER'S NAME"),
-                  MyCard("PHONE NUMBER"),
-                  MyCard("PHONE NUMBER"),
-                  MyCard("PHONE NUMBER"),
+                  InfoCard('Sumit Reddy At 6:30 PM', 'phone', '+91 8130180208'),
+                  InfoCard(
+                      'Prateek hiremath At 6:30 PM', 'phone', '+91 8130180208'),
+                  InfoCard('Sanjay At 6:30 PM', 'phone', '+91 8130180208'),
+                  InfoCard('Akhram At 6:30 PM', 'phone', '+91 8130180208'),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Divider(
+                thickness: 1,
+                color: Color(0xffFC2E7E),
+                indent: 50,
+                endIndent: 50,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Available Drivers",
+                style: TextStyle(
+                    color: Color(0xff1B90CE),
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 2,
+                    fontSize: 20),
+              ),
+              ListView(
+                shrinkWrap: true,
+                children: <Widget>[
+                  InfoCard('Sumit Reddy', 'phone', '+91 8130180208'),
+                  InfoCard('Prateek hiremath', 'phone', '+91 8130180208'),
+                  InfoCard('Sanjay', 'phone', '+91 8130180208'),
+                  InfoCard('Akhram', 'phone', '+91 8130180208'),
                 ],
               )
             ],

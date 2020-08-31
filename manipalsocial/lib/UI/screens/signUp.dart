@@ -95,8 +95,7 @@ class SignUpScreen extends StatelessWidget {
                                   phoneController.text,
                                   passwordController.text);
                           if (success == true) {
-                            Navigator.pushReplacementNamed(
-                                context, '/placeSingle');
+                            Navigator.pushReplacementNamed(context, '/home');
                           } else {
                             showMyDialog(
                                 context,

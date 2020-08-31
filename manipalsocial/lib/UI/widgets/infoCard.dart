@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class InfoCard extends StatelessWidget {
-  final String info;
+  final String heading;
+  final String description;
   final String type;
   IconData iconSelector() {
     if (type == "email")
@@ -13,7 +14,7 @@ class InfoCard extends StatelessWidget {
       return Icons.add_comment;
   }
 
-  InfoCard(this.info, this.type);
+  InfoCard(this.heading, this.type, this.description);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,15 +38,27 @@ class InfoCard extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.all(12.0),
               ),
-              Flexible(
-                child: Text(
-                  info,
-                  style: TextStyle(
-                    color: Color(0xff1B90CE),
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.bold,
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    heading,
+                    style: TextStyle(
+                      color: Color(0xff1B90CE),
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
+                  Text(
+                    description,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

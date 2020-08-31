@@ -1,4 +1,5 @@
 class Place {
+  String mongooseId;
   String name;
   String what;
   String where;
@@ -7,7 +8,8 @@ class Place {
   double latitude;
   double longitude;
   Place(
-      {this.name,
+      {this.mongooseId,
+      this.name,
       this.what,
       this.imageUrl,
       this.where,
@@ -16,7 +18,8 @@ class Place {
       this.longitude});
 
   Place.fromJson(Map<dynamic, dynamic> json)
-      : name = json['name'],
+      : mongooseId = json['_id'],
+        name = json['name'],
         what = json["what"],
         where = json['where'],
         imageUrl = json['imageUrl'],
