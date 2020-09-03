@@ -105,4 +105,33 @@ class WebApi {
       return error;
     }
   }
+
+  Future<dynamic> getExperiences(headers, placeID) async {
+    final apiUrl = url + 'experiences/list/$placeID';
+    var response, responseStatus;
+    try {
+      response = await http.get(apiUrl, headers: {'Authorization': headers});
+      responseStatus = json.decode(response.body)['status'];
+    } catch (e) {
+      print(e);
+      return networkError;
+    }
+    if (response.statusCode == 200 && responseStatus == "success") {
+      var expData = {
+        'success': true,
+        'mostLikedExp': json.decode(response.body)['data']['mostLikedExp'],
+        'dateSortedExp': json.decode(response.body)['data']['dateSortedExp'],
+        'message': json.decode(response.body)['message']
+      };
+      return expData;
+    } else {
+      var error = {
+        'success': false,
+        'error': json.decode(response.body)['error'],
+        'message': json.decode(response.body)['message']
+      };
+      return error;
+    }
+  }
+
 }
