@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:manipalsocial/UI/widgets/homeScreenCard.dart';
+import 'package:manipalsocial/UI/widgets/pinkButton.dart';
 import 'package:manipalsocial/UI/widgets/promoCard.dart';
 import 'package:manipalsocial/logic/viewModels/placeViewModel.dart';
 import 'package:manipalsocial/logic/viewModels/userViewModel.dart';
@@ -35,6 +36,22 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
+            Divider(
+              thickness: 1,
+              color: Color(0xffFC2E7E),
+              indent: 50,
+              endIndent: 50,
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Text(
+              'Explore',
+              style: TextStyle(
+                  color: Color(0xff1B90CE),
+                  fontSize: 17.0,
+                  fontWeight: FontWeight.bold),
+            ),
             SizedBox(
               height: 20.0,
             ),
@@ -58,8 +75,9 @@ class HomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                HomeScreenCard(
-                    'Community Chat', 'assets/images/chat.png', () {}),
+                HomeScreenCard('Community Chat', 'assets/images/chat.png', () {
+                  Navigator.pushNamed(context, '/chat');
+                }),
                 HomeScreenCard(
                     'Events of Manipal', 'assets/images/places.png', () {}),
               ],
@@ -74,6 +92,50 @@ class HomeScreen extends StatelessWidget {
                   Provider.of<UserViewModel>(context, listen: false).logOut();
                 }),
               ],
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Divider(
+              thickness: 1,
+              color: Color(0xffFC2E7E),
+              indent: 50,
+              endIndent: 50,
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            Text(
+              'Reach out to us.',
+              style: TextStyle(
+                  color: Color(0xff1B90CE),
+                  fontSize: 17.0,
+                  fontWeight: FontWeight.bold),
+            ),
+            Text(
+              'Want to publicize your event or club?',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 13.0,
+                  fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
+            PinkButton(
+              buttonText: 'Contact Us',
+              onPress: () {},
+            ),
+            PinkButton(
+              buttonText: ' Out Team ',
+              onPress: () {},
+            ),
+            PinkButton(
+              buttonText: ' About Us ',
+              onPress: () {},
+            ),
+            SizedBox(
+              height: 20.0,
             ),
           ],
         ),

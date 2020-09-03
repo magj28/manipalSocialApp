@@ -14,6 +14,8 @@ class CustomTextField extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(5.0),
         child: Container(
+          // width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.all(5),
           margin: EdgeInsets.only(right: 30.0, left: 30.0),
           decoration: BoxDecoration(
             boxShadow: [
@@ -29,6 +31,9 @@ class CustomTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(40.0),
           ),
           child: TextField(
+            maxLines: 15,
+            minLines: 1,
+            // expands: true,
             controller: controller,
             obscureText: isPassword,
             style: TextStyle(color: Colors.white),

@@ -48,7 +48,7 @@ class PlaceSingleScreen extends StatelessWidget {
                   PinkButton(
                     buttonText: 'Experiences',
                     onPress: () {
-                      print("register");
+                      Navigator.pushNamed(context, '/experience');
                     },
                   ),
                   PinkButton(
@@ -63,14 +63,6 @@ class PlaceSingleScreen extends StatelessWidget {
                 thickness: 1,
                 color: Color(0xffFC2E7E),
               ),
-              // PinkButton(
-              //   buttonText: 'Logout',
-              //   onPress: () {
-              //     Provider.of<UserViewModel>(context, listen: false).logOut();
-              //     Navigator.pushNamedAndRemoveUntil(
-              //         context, '/', (route) => false);
-              //   },
-              // ),
               _infoColumn(place.name, place.what),
               _infoColumn('Where', place.where),
               _infoColumn('Trivia', place.specialInfo),

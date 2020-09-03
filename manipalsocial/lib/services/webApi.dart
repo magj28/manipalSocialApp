@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class WebApi {
-  final String url = "https://938ad55a683f.ngrok.io/";
+  final String url = "https://edb3851ac4f4.ngrok.io/";
   var networkError = {
     'success': false,
     'error': "Network Error.",

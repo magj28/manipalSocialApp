@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:manipalsocial/UI/screens/addExperience.dart';
 import 'package:manipalsocial/UI/screens/cabShareScreen.dart';
+import 'package:manipalsocial/UI/screens/chatScreen.dart';
+import 'package:manipalsocial/UI/screens/experienceScreen.dart';
 import 'package:manipalsocial/UI/screens/homeScreen.dart';
 import 'package:manipalsocial/UI/screens/loginScreen.dart';
 import 'package:manipalsocial/UI/screens/placeSingle.dart';
@@ -30,7 +33,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Manipal Social',
-      theme: ThemeData(accentColor: Color(0xffFC2E7E)),
+      theme: ThemeData(
+        accentColor: Color(0xffFC2E7E),
+        primaryColor: Color(0xffFC2E7E),
+        canvasColor: Color(0xff131132),
+      ),
       initialRoute: '/',
       routes: {
         '/': (context) => Splash(),
@@ -40,7 +47,10 @@ class MyApp extends StatelessWidget {
         '/placeSingle': (context) => PlaceSingleScreen(),
         '/place': (context) => PlacesScreen(),
         '/profile': (context) => ProfileScreen(),
-        '/cabShare': (context) => CarPage()
+        '/cabShare': (context) => CarPage(),
+        '/addExperience': (context) => AddExperienceScreen(),
+        '/experience': (context) => ExperienceScreen(),
+        '/chat': (context) => ChatScreen(),
       },
     );
   }
