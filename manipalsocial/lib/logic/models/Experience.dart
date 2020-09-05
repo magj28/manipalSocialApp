@@ -1,14 +1,18 @@
+import 'package:manipalsocial/logic/models/User.dart';
+import 'package:manipalsocial/services/dateTimeConverter.dart';
+
 class Experience {
   String mongooseId;
   String experience;
-  String userID;
+  User user;
   String placeID;
   String createdAt;
   int likes;
 
-  Experience({this.mongooseId,
+  Experience({
+    this.mongooseId,
     this.experience,
-    this.userID,
+    this.user,
     this.placeID,
     this.createdAt,
     this.likes,
@@ -17,9 +21,8 @@ class Experience {
   Experience.fromJson(Map<dynamic, dynamic> json)
       : mongooseId = json['_id'],
         experience = json['experience'],
-        userID = json['userID'],
-        placeID = json['placeID'],
-        createdAt = json['createdAt'],
+        user = User.fromJson(json['user_id']),
+        placeID = json['place_id'],
+        createdAt = dateTimeConver(json['createdAt']),
         likes = json["likes"];
-
 }

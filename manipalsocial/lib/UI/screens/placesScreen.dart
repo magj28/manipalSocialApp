@@ -30,6 +30,7 @@ class PlacesScreen extends StatelessWidget {
             style: TextStyle(color: Color(0xffFC2E7E)),
           ),
         ),
+        centerTitle: true,
         backgroundColor: Color(0xff131132),
       ),
       body: DefaultTabController(

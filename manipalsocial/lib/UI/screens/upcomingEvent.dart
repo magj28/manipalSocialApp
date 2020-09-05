@@ -1,30 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:manipalsocial/UI/widgets/infoCard.dart';
 import 'package:manipalsocial/logic/models/Event.dart';
-import 'package:provider/provider.dart';
 
 class UpcomingEvent extends StatelessWidget {
-
-
   Event _event = new Event(
     name: 'Dhol Baje',
     when: '31/08/2020 \n5:30pm',
     where: 'KMC Green',
-    imageUrl: 'https://indianstorytime.files.wordpress.com/2012/10/550409_2458318194207_818717898_n.jpg',
+    imageUrl:
+        'https://indianstorytime.files.wordpress.com/2012/10/550409_2458318194207_818717898_n.jpg',
     what: 'Annual charitable gala event ‘Dhol Baje’ with a Dandiya night theme',
     organizer: 'Rotaract Club of Manipal',
-    contact: {
-      'Shubham': '+91 8130180208',
-      'Shubh': '+91 81230180208'
-    },
+    contact: {'Shubham': '+91 8130180208', 'Shubh': '+91 81230180208'},
   );
-
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       backgroundColor: Color(0xff131132),
       appBar: AppBar(
@@ -36,6 +27,7 @@ class UpcomingEvent extends StatelessWidget {
                 color: Color(0xffFC2E7E), fontWeight: FontWeight.bold),
           ),
         ),
+        centerTitle: true,
         backgroundColor: Color(0xff131132),
       ),
       body: SingleChildScrollView(
@@ -78,7 +70,6 @@ class UpcomingEvent extends StatelessWidget {
                             fontSize: 17.0,
                             fontWeight: FontWeight.bold),
                       ),
-
                     ],
                   ),
                 ),
@@ -128,4 +119,3 @@ class UpcomingEvent extends StatelessWidget {
     );
   }
 }
-

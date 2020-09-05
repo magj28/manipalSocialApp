@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:manipalsocial/UI/widgets/customTextField.dart';
 import 'package:manipalsocial/UI/widgets/pinkButton.dart';
+import 'package:manipalsocial/logic/viewModels/experienceViewModel.dart';
+import 'package:manipalsocial/logic/viewModels/placeViewModel.dart';
+import 'package:manipalsocial/logic/viewModels/userViewModel.dart';
+import 'package:provider/provider.dart';
 
 class AddExperienceScreen extends StatelessWidget {
+  final expController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,13 +47,36 @@ class AddExperienceScreen extends StatelessWidget {
           CustomTextField(
             hintMessage: 'Write your experience',
             isPassword: false,
+            controller: expController,
           ),
           SizedBox(
             height: 40,
           ),
           PinkButton(
             buttonText: 'Submit',
-            onPress: () {},
+            onPress: () {
+              //finding headers and place if to send in the request
+              String headers =
+                  Provider.of<UserViewModel>(context, listen: false).headers;
+              String placeID =
+                  Provider.of<PlaceViewModel>(context, listen: false)
+                      .singlePlace
+                      .mongooseId;
+
+              //Finding out the operation type - create or edit?
+              Operation op =
+                  Provider.of<ExperienceViewModel>(context, listen: false)
+                      .operation;
+              if (op == Operation.Create) {
+                //create a new experience
+                Provider.of<ExperienceViewModel>(context, listen: false)
+                    .createExperience(headers, placeID, expController.text);
+              } else {
+                //Update experience
+              }
+
+              Navigator.pop(context);
+            },
           )
         ],
       ),

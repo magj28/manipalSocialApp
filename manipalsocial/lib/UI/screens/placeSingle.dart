@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:manipalsocial/UI/widgets/pinkButton.dart';
 import 'package:manipalsocial/logic/models/Place.dart';
+import 'package:manipalsocial/logic/viewModels/experienceViewModel.dart';
 import 'package:manipalsocial/logic/viewModels/placeViewModel.dart';
+import 'package:manipalsocial/logic/viewModels/userViewModel.dart';
 import 'package:provider/provider.dart';
 
 class PlaceSingleScreen extends StatelessWidget {
@@ -20,6 +22,7 @@ class PlaceSingleScreen extends StatelessWidget {
                 color: Color(0xffFC2E7E), fontWeight: FontWeight.bold),
           ),
         ),
+        centerTitle: true,
         backgroundColor: Color(0xff131132),
       ),
       body: SingleChildScrollView(
@@ -48,6 +51,15 @@ class PlaceSingleScreen extends StatelessWidget {
                   PinkButton(
                     buttonText: 'Experiences',
                     onPress: () {
+                      String headers =
+                          Provider.of<UserViewModel>(context, listen: false)
+                              .headers;
+                      String placeID =
+                          Provider.of<PlaceViewModel>(context, listen: false)
+                              .singlePlace
+                              .mongooseId;
+                      Provider.of<ExperienceViewModel>(context, listen: false)
+                          .getExperiences(headers, placeID);
                       Navigator.pushNamed(context, '/experience');
                     },
                   ),

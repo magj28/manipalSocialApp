@@ -22,6 +22,7 @@ class ProfileScreen extends StatelessWidget {
               fontSize: 28.0,
               color: Color(0xffFC2E7E)),
         )),
+        centerTitle: true,
         backgroundColor: const Color(0xff1D1D3E),
       ),
       body: SingleChildScrollView(

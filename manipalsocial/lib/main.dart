@@ -10,6 +10,7 @@ import 'package:manipalsocial/UI/screens/placesScreen.dart';
 import 'package:manipalsocial/UI/screens/profileScreen.dart';
 import 'package:manipalsocial/UI/screens/signUp.dart';
 import 'package:manipalsocial/UI/screens/splashScreen.dart';
+import 'package:manipalsocial/logic/viewModels/experienceViewModel.dart';
 import 'package:manipalsocial/logic/viewModels/placeViewModel.dart';
 import 'package:manipalsocial/logic/viewModels/userViewModel.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +23,9 @@ void main() {
     ),
     ChangeNotifierProvider.value(
       value: PlaceViewModel(),
+    ),
+    ChangeNotifierProvider.value(
+      value: ExperienceViewModel(),
     )
   ], child: MyApp()));
 }

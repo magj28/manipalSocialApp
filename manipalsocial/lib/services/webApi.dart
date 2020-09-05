@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class WebApi {
-  final String url = "https://edb3851ac4f4.ngrok.io/";
+  final String url = "https://1ae1f195c38b.ngrok.io/";
   var networkError = {
     'success': false,
     'error': "Network Error.",
@@ -134,4 +134,60 @@ class WebApi {
     }
   }
 
+  Future<dynamic> writeExperiences(headers, placeID, experience) async {
+    final apiUrl = url + 'experiences/newExp/$placeID';
+    var response, responseStatus;
+    try {
+      response = await http.post(apiUrl, headers: {
+        'Authorization': headers
+      }, body: {
+        'experience': experience,
+      });
+      responseStatus = json.decode(response.body)['status'];
+    } catch (e) {
+      print(e);
+      return networkError;
+    }
+    if (response.statusCode == 200 && responseStatus == "success") {
+      var newExpData = {
+        'success': true,
+        'newExp': json.decode(response.body)['newExp'],
+        'message': json.decode(response.body)['message']
+      };
+      return newExpData;
+    } else {
+      var error = {
+        'success': false,
+        'error': json.decode(response.body)['error'],
+        'message': json.decode(response.body)['message']
+      };
+      return error;
+    }
+  }
+
+  Future<dynamic> deleteExperiences(headers, expID) async {
+    final apiUrl = url + 'experiences/deleteExp/$expID';
+    var response, responseStatus;
+    try {
+      response = await http.delete(apiUrl, headers: {'Authorization': headers});
+      responseStatus = json.decode(response.body)['status'];
+    } catch (e) {
+      print(e);
+      return networkError;
+    }
+    if (response.statusCode == 200 && responseStatus == "success") {
+      var deletedExpData = {
+        'success': true,
+        'message': json.decode(response.body)['message']
+      };
+      return deletedExpData;
+    } else {
+      var error = {
+        'success': false,
+        'error': json.decode(response.body)['error'],
+        'message': json.decode(response.body)['message']
+      };
+      return error;
+    }
+  }
 }

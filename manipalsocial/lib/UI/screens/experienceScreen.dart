@@ -1,27 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:manipalsocial/UI/widgets/experienceCard.dart';
 import 'package:manipalsocial/UI/widgets/pinkButton.dart';
+import 'package:manipalsocial/logic/viewModels/experienceViewModel.dart';
+import 'package:provider/provider.dart';
 
 class ExperienceScreen extends StatelessWidget {
-  var names = [
-    'Shubham Pathak',
-    'Sarath Chandra Reddy',
-    'Almas Ahsruf Khan',
-    'Sarthak Nitin Khandelwal'
-  ];
-  var email = [
-    'smartshubhampathak@gmail.com',
-    'almasAshurfkhansdfasf@gmail.com',
-    'asdsdanfbksadbf@gmail.com',
-    'asfd@gmail.com'
-  ];
-  var likes = ['300', '350', '400', '450'];
-  var date = ['6/8/2020', '7/8/2020', '8/8/2020', '9/8/2020'];
-  String experience =
-      'One of the most happening beach in the region. Located around 8 km from udupi.\nBest time to visit is Nov-Feb,otherwise its going to be really hot out there. One of the most happening beach in the region. Located around 8 km from udupi.\nBest time to visit is Nov-Feb,otherwise its going to be really hot out there. One of the most happening beach in the region. Located around 8 km from udupi.\nBest time to visit is Nov-Feb,otherwise its going to be really hot out there. One of the most happening beach in the region. Located around 8 km from udupi.\nBest time to visit is Nov-Feb,otherwise its going to be really hot out there';
-
   @override
   Widget build(BuildContext context) {
+    //using provider to get data
+    //listen is not set to false so as to rebuild the tree whenver data changes
+    final exps = Provider.of<ExperienceViewModel>(context);
     return Scaffold(
       backgroundColor: Color(0xff131132),
       appBar: AppBar(
@@ -34,23 +22,81 @@ class ExperienceScreen extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
       ),
-      body: ListView.builder(
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        itemCount: 4,
-        itemBuilder: (context, index) {
-          return ExperienceCard(
-              name: names[index],
-              email: email[index],
-              date: date[index],
-              likes: likes[index],
-              experience: experience);
-        },
+      body: SingleChildScrollView(
+        child: Container(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Top posts',
+                style: TextStyle(
+                    color: Color(0xff1B90CE),
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.bold),
+              ),
+              Divider(
+                thickness: 1,
+                color: Color(0xffFC2E7E),
+                indent: 50,
+                endIndent: 50,
+              ),
+              exps.isFetchingData //to show a progress indicator while its fetching data
+                  ? Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemCount: exps.mostLikedExp.length,
+                      itemBuilder: (context, index) {
+                        return ExperienceCard(
+                          name: exps.mostLikedExp[index].user.name,
+                          email: exps.mostLikedExp[index].user.email,
+                          date: exps.mostLikedExp[index].createdAt,
+                          likes: exps.mostLikedExp[index].likes.toString(),
+                          experience: exps.mostLikedExp[index].experience,
+                          expID: exps.mostLikedExp[index].mongooseId,
+                        );
+                      },
+                    ),
+              Text(
+                'Other posts',
+                style: TextStyle(
+                    color: Color(0xff1B90CE),
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.bold),
+              ),
+              Divider(
+                thickness: 1,
+                color: Color(0xffFC2E7E),
+                indent: 50,
+                endIndent: 50,
+              ),
+              exps.isFetchingData //to show a progress indicator while its fetching data
+                  ? Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: exps.dateSortedExp.length,
+                      itemBuilder: (context, index) {
+                        return ExperienceCard(
+                          name: exps.dateSortedExp[index].user.name,
+                          email: exps.dateSortedExp[index].user.email,
+                          date: exps.dateSortedExp[index].createdAt,
+                          likes: exps.dateSortedExp[index].likes.toString(),
+                          experience: exps.dateSortedExp[index].experience,
+                          expID: exps.dateSortedExp[index].mongooseId,
+                        );
+                      },
+                    ),
+            ],
+          ),
+        ),
       ),
       persistentFooterButtons: <Widget>[
         PinkButton(
           buttonText: '+ Write your Experience',
           onPress: () {
+            exps.setOperation(Operation.Create);
             Navigator.pushNamed(context, '/addExperience');
           },
         )
