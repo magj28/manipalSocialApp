@@ -75,21 +75,9 @@ class ExperienceCard extends StatelessWidget {
                           email)
                       ? Container()
                       : PopUpMenu(expID),
-                  IconButton(
-                    splashColor: Colors.amber,
-                    icon: Icon(
-                      Icons.favorite_border,
-                      color: Colors.white,
-                      size: 35,
-                    ),
-                    onPressed: () {},
-                  ),
-                  Text(
-                    likes,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15),
+                  LikeButton(
+                    likes: likes,
+                    expID: expID,
                   ),
                 ],
               )
@@ -111,6 +99,58 @@ class ExperienceCard extends StatelessWidget {
   }
 }
 
+class LikeButton extends StatefulWidget {
+  final likes;
+  final expID;
+  const LikeButton({Key key, this.likes, this.expID}) : super(key: key);
+
+  @override
+  _LikeButtonState createState() => _LikeButtonState();
+}
+
+class _LikeButtonState extends State<LikeButton> {
+  bool liked = false;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        IconButton(
+          splashColor: Colors.pink,
+          icon: Icon(
+            liked ? Icons.favorite : Icons.favorite_border,
+            color: liked ? Colors.red : Colors.white,
+            size: 35,
+          ),
+          onPressed: () {
+            String type;
+            setState(() {
+              if (liked == true) {
+                liked = false;
+                type = 'unlike';
+              } else {
+                liked = true;
+                type = 'like';
+              }
+            });
+            String headers =
+                Provider.of<UserViewModel>(context, listen: false).headers;
+            Provider.of<ExperienceViewModel>(context, listen: false)
+                .updateLikes(headers, widget.expID, type);
+          },
+        ),
+        Text(
+          widget.likes,
+          style: TextStyle(
+              color: liked ? Colors.red : Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 15),
+        ),
+      ],
+    );
+  }
+}
+
+//Popup menu to edit and delete experiences
 enum options { delete, edit }
 
 class PopUpMenu extends StatefulWidget {
@@ -140,6 +180,8 @@ class _PopUpMenuState extends State<PopUpMenu> {
           //edit the experience by changing the operation type
           Provider.of<ExperienceViewModel>(context, listen: false)
               .setOperation(Operation.Edit);
+          Provider.of<ExperienceViewModel>(context, listen: false)
+              .setExpID(widget.expID);
           Navigator.pushNamed(context, '/addExperience');
         }
       },

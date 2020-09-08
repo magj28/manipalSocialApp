@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:manipalsocial/UI/screens/addExperience.dart';
 import 'package:manipalsocial/UI/screens/cabShareScreen.dart';
 import 'package:manipalsocial/UI/screens/chatScreen.dart';
+import 'package:manipalsocial/UI/screens/eventsScreen.dart';
 import 'package:manipalsocial/UI/screens/experienceScreen.dart';
 import 'package:manipalsocial/UI/screens/homeScreen.dart';
 import 'package:manipalsocial/UI/screens/loginScreen.dart';
@@ -10,6 +11,7 @@ import 'package:manipalsocial/UI/screens/placesScreen.dart';
 import 'package:manipalsocial/UI/screens/profileScreen.dart';
 import 'package:manipalsocial/UI/screens/signUp.dart';
 import 'package:manipalsocial/UI/screens/splashScreen.dart';
+import 'package:manipalsocial/UI/screens/upcomingEvent.dart';
 import 'package:manipalsocial/logic/viewModels/experienceViewModel.dart';
 import 'package:manipalsocial/logic/viewModels/placeViewModel.dart';
 import 'package:manipalsocial/logic/viewModels/userViewModel.dart';
@@ -55,6 +57,8 @@ class MyApp extends StatelessWidget {
         '/addExperience': (context) => AddExperienceScreen(),
         '/experience': (context) => ExperienceScreen(),
         '/chat': (context) => ChatScreen(),
+        '/upcomingEvent': (context) => UpcomingEvent(),
+        '/event': (context) => EventScreen(),
       },
     );
   }

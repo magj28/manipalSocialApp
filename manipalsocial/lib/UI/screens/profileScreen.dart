@@ -14,14 +14,11 @@ class ProfileScreen extends StatelessWidget {
       backgroundColor: const Color(0xff131132),
       appBar: AppBar(
         elevation: 10.0,
-        title: Center(
-            child: Text(
-          'YOUR PROFILE',
-          style: TextStyle(
-              fontFamily: 'SourceSansPro',
-              fontSize: 28.0,
-              color: Color(0xffFC2E7E)),
-        )),
+        title: Text(
+          'Your Profile',
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Color(0xffFC2E7E)),
+        ),
         centerTitle: true,
         backgroundColor: const Color(0xff1D1D3E),
       ),

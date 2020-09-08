@@ -19,12 +19,10 @@ class _CarPageState extends State<CarPage> {
       backgroundColor: Color(0xff131132),
       appBar: AppBar(
         centerTitle: true,
-        title: Center(
-          child: Text(
-            'Places',
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Color(0xffFC2E7E)),
-          ),
+        title: Text(
+          'Cab Share',
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Color(0xffFC2E7E)),
         ),
         backgroundColor: Color(0xff131132),
       ),
@@ -132,6 +130,7 @@ class _CarPageState extends State<CarPage> {
                     fontSize: 20),
               ),
               ListView(
+                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 children: <Widget>[
                   InfoCard('Sumit Reddy At 6:30 PM', 'phone', '+91 8130180208'),
@@ -162,6 +161,7 @@ class _CarPageState extends State<CarPage> {
                     fontSize: 20),
               ),
               ListView(
+                physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 children: <Widget>[
                   InfoCard('Sumit Reddy', 'phone', '+91 8130180208'),

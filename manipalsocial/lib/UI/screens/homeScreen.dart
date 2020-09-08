@@ -78,8 +78,10 @@ class HomeScreen extends StatelessWidget {
                 HomeScreenCard('Community Chat', 'assets/images/chat.png', () {
                   Navigator.pushNamed(context, '/chat');
                 }),
-                HomeScreenCard(
-                    'Events of Manipal', 'assets/images/places.png', () {}),
+                HomeScreenCard('Events of Manipal', 'assets/images/places.png',
+                    () {
+                  Navigator.pushNamed(context, '/event');
+                }),
               ],
             ),
             Row(

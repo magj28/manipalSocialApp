@@ -1,4 +1,4 @@
-class Event {
+class ComingEvent {
   String mongooseId;
   String name;
   String when;
@@ -6,19 +6,19 @@ class Event {
   String imageUrl;
   String what;
   String organizer;
-  Map<String, String> contact;
+  List<Map<String, String>> contact;
 
-  Event({this.mongooseId,
-    this.name,
-    this.when,
-    this.where,
-    this.imageUrl,
-    this.what,
-    this.organizer,
-    this.contact
-  });
+  ComingEvent(
+      {this.mongooseId,
+      this.name,
+      this.when,
+      this.where,
+      this.imageUrl,
+      this.what,
+      this.organizer,
+      this.contact});
 
-  Event.fromJson(Map<dynamic, dynamic> json)
+  ComingEvent.fromJson(Map<dynamic, dynamic> json)
       : mongooseId = json['_id'],
         name = json['name'],
         when = json["when"],
@@ -26,5 +26,5 @@ class Event {
         imageUrl = json['imageUrl'],
         what = json['what'],
         organizer = json['organizer'],
-        contact= json['contact'];
+        contact = json['contact'];
 }

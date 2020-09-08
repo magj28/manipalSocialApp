@@ -11,6 +11,8 @@ class AddExperienceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final singlePlace = Provider.of<PlaceViewModel>(context, listen: false);
+    final exp = Provider.of<ExperienceViewModel>(context, listen: false);
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       backgroundColor: Color(0xff131132),
@@ -32,7 +34,7 @@ class AddExperienceScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Text(
-              'Write Your Experience in Malpe Beach',
+              'Write Your Experience in ${singlePlace.singlePlace.name}',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 20,
@@ -58,23 +60,18 @@ class AddExperienceScreen extends StatelessWidget {
               //finding headers and place if to send in the request
               String headers =
                   Provider.of<UserViewModel>(context, listen: false).headers;
-              String placeID =
-                  Provider.of<PlaceViewModel>(context, listen: false)
-                      .singlePlace
-                      .mongooseId;
+              String placeID = singlePlace.singlePlace.mongooseId;
 
               //Finding out the operation type - create or edit?
-              Operation op =
-                  Provider.of<ExperienceViewModel>(context, listen: false)
-                      .operation;
+              Operation op = exp.operation;
               if (op == Operation.Create) {
                 //create a new experience
-                Provider.of<ExperienceViewModel>(context, listen: false)
-                    .createExperience(headers, placeID, expController.text);
+                exp.createExperience(headers, placeID, expController.text);
               } else {
                 //Update experience
+                String expID = exp.expID;
+                exp.editExperience(headers, expID, placeID, expController.text);
               }
-
               Navigator.pop(context);
             },
           )

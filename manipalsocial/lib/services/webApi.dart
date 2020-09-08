@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class WebApi {
-  final String url = "https://1ae1f195c38b.ngrok.io/";
+  final String url = "https://0b7aac98cc63.ngrok.io/";
   var networkError = {
     'success': false,
     'error': "Network Error.",
@@ -155,6 +155,64 @@ class WebApi {
         'message': json.decode(response.body)['message']
       };
       return newExpData;
+    } else {
+      var error = {
+        'success': false,
+        'error': json.decode(response.body)['error'],
+        'message': json.decode(response.body)['message']
+      };
+      return error;
+    }
+  }
+
+  Future<dynamic> editExperiences(headers, expID, experience) async {
+    final apiUrl = url + 'experiences/editExp/$expID';
+    var response, responseStatus;
+    try {
+      response = await http.patch(apiUrl, headers: {
+        'Authorization': headers
+      }, body: {
+        'experience': experience,
+      });
+      responseStatus = json.decode(response.body)['status'];
+    } catch (e) {
+      print(e);
+      return networkError;
+    }
+    if (response.statusCode == 200 && responseStatus == "success") {
+      var updatedExpData = {
+        'success': true,
+        'newExp': json.decode(response.body)['updatedExp'],
+        'message': json.decode(response.body)['message']
+      };
+      return updatedExpData;
+    } else {
+      var error = {
+        'success': false,
+        'error': json.decode(response.body)['error'],
+        'message': json.decode(response.body)['message']
+      };
+      return error;
+    }
+  }
+
+  Future<dynamic> updateLikesExperiences(headers, expID, type) async {
+    final apiUrl = url + 'experiences/updateLikes/$expID?type=$type';
+    var response, responseStatus;
+    try {
+      response = await http.patch(apiUrl, headers: {'Authorization': headers});
+      responseStatus = json.decode(response.body)['status'];
+    } catch (e) {
+      print(e);
+      return networkError;
+    }
+    if (response.statusCode == 200 && responseStatus == "success") {
+      print(response.body);
+      var updatedExpData = {
+        'success': true,
+        'message': json.decode(response.body)['message']
+      };
+      return updatedExpData;
     } else {
       var error = {
         'success': false,

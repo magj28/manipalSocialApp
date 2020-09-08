@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:manipalsocial/logic/models/Event.dart';
+import 'package:manipalsocial/UI/widgets/infoCard.dart';
+import 'package:manipalsocial/logic/models/upcomingEvent.dart';
 
 class UpcomingEvent extends StatelessWidget {
-  Event _event = new Event(
+  ComingEvent _event = new ComingEvent(
     name: 'Dhol Baje',
     when: '31/08/2020 \n5:30pm',
     where: 'KMC Green',
@@ -11,7 +12,10 @@ class UpcomingEvent extends StatelessWidget {
         'https://indianstorytime.files.wordpress.com/2012/10/550409_2458318194207_818717898_n.jpg',
     what: 'Annual charitable gala event ‘Dhol Baje’ with a Dandiya night theme',
     organizer: 'Rotaract Club of Manipal',
-    contact: {'Shubham': '+91 8130180208', 'Shubh': '+91 81230180208'},
+    contact: [
+      {'Name': "Shubham", "ContactNum": "+91 8130180208"},
+      {'Name': "Shubham", "ContactNum": "+91 8130180208"}
+    ],
   );
 
   @override
@@ -19,13 +23,11 @@ class UpcomingEvent extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xff131132),
       appBar: AppBar(
-        title: Center(
-          child: Text(
-            'Upcoming Event',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Color(0xffFC2E7E), fontWeight: FontWeight.bold),
-          ),
+        title: Text(
+          'Upcoming Event',
+          textAlign: TextAlign.center,
+          style:
+              TextStyle(color: Color(0xffFC2E7E), fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         backgroundColor: Color(0xff131132),
@@ -74,12 +76,10 @@ class UpcomingEvent extends StatelessWidget {
                   ),
                 ),
               ),
-              // _event.contact.forEach((key, value) {
-              //   InfoCard(key, 'phone', value);
-              // }),
-              // for(MapEntry<String, String> k in _event.contact.entries){
-              //   InfoCard(k.key, 'phone', k.value)
-              // },
+              InfoCard(_event.contact[0]['Name'], 'phone',
+                  _event.contact[0]['ContactNum']),
+              InfoCard(_event.contact[1]['Name'], 'phone',
+                  _event.contact[1]['ContactNum']),
               Padding(
                 padding: EdgeInsets.all(10.0),
               ),
@@ -99,7 +99,7 @@ class UpcomingEvent extends StatelessWidget {
           children: <Widget>[
             Text(
               heading == _event.name
-                  ? (_event.name + '\n' + _event.organizer)
+                  ? (_event.name + '\n' + "by " + _event.organizer)
                   : heading,
               style: TextStyle(
                   color: Color(0xff1B90CE),

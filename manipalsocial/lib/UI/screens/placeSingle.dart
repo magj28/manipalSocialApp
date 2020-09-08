@@ -14,13 +14,11 @@ class PlaceSingleScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xff131132),
       appBar: AppBar(
-        title: Center(
-          child: Text(
-            place.name,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Color(0xffFC2E7E), fontWeight: FontWeight.bold),
-          ),
+        title: Text(
+          place.name,
+          textAlign: TextAlign.center,
+          style:
+              TextStyle(color: Color(0xffFC2E7E), fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
         backgroundColor: Color(0xff131132),

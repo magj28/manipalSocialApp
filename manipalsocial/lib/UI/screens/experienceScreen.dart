@@ -15,9 +15,9 @@ class ExperienceScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xff131132),
         title: Text(
-          'EXPERIENCE',
-          style: TextStyle(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),
+          'Experiences',
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Color(0xffFC2E7E)),
         ),
         centerTitle: true,
         elevation: 0,
