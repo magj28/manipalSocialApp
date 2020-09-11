@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:manipalsocial/UI/widgets/infoCard.dart';
-import 'package:manipalsocial/logic/models/upcomingEvent.dart';
+import 'package:manipalsocial/logic/models/UpcomingEvent.dart';
 
 class UpcomingEvent extends StatelessWidget {
   ComingEvent _event = new ComingEvent(

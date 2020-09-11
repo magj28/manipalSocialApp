@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class ComingEvent {
   String mongooseId;
   String name;
@@ -9,14 +11,14 @@ class ComingEvent {
   List<Map<String, String>> contact;
 
   ComingEvent(
-      {this.mongooseId,
-      this.name,
-      this.when,
-      this.where,
-      this.imageUrl,
-      this.what,
-      this.organizer,
-      this.contact});
+      {@required this.mongooseId,
+        @required this.name,
+        @required this.when,
+        @required this.where,
+        @required this.imageUrl,
+        @required this.what,
+        @required this.organizer,
+        @required this.contact});
 
   ComingEvent.fromJson(Map<dynamic, dynamic> json)
       : mongooseId = json['_id'],
