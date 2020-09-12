@@ -71,7 +71,11 @@ class PlacesScreen extends StatelessWidget {
                               return CustomCard(
                                 imageurl: "assets/images/beachLogo.png",
                                 name: places.beaches[index].name,
-                                info: places.beaches[index].what,
+                                //taking the substring of info as we don't want
+                                //to show the entire essay here.
+                                info: places.beaches[index].what
+                                        .substring(0, 50) +
+                                    "...",
                                 onTap: () {
                                   places.setSinglePlace(places.beaches[index]);
                                   Navigator.pushNamed(context, '/placeSingle');
@@ -85,7 +89,9 @@ class PlacesScreen extends StatelessWidget {
                               return CustomCard(
                                   imageurl: "assets/images/resturantLogo.png",
                                   name: places.resturants[index].name,
-                                  info: places.resturants[index].what,
+                                  info: places.resturants[index].what
+                                          .substring(0, 50) +
+                                      "...",
                                   onTap: () {
                                     places.setSinglePlace(
                                         places.resturants[index]);
@@ -100,7 +106,9 @@ class PlacesScreen extends StatelessWidget {
                               return CustomCard(
                                   imageurl: "assets/images/clubLogo.png",
                                   name: places.clubs[index].name,
-                                  info: places.clubs[index].what,
+                                  info: places.clubs[index].what
+                                          .substring(0, 50) +
+                                      "...",
                                   onTap: () {
                                     places.setSinglePlace(places.clubs[index]);
                                     Navigator.pushNamed(

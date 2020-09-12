@@ -2,24 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:manipalsocial/UI/widgets/infoCard.dart';
 import 'package:manipalsocial/logic/models/UpcomingEvent.dart';
+import 'package:manipalsocial/logic/viewModels/eventViewModel.dart';
+import 'package:provider/provider.dart';
 
 class UpcomingEvent extends StatelessWidget {
-  ComingEvent _event = new ComingEvent(
-    name: 'Dhol Baje',
-    when: '31/08/2020 \n5:30pm',
-    where: 'KMC Green',
-    imageUrl:
-        'https://indianstorytime.files.wordpress.com/2012/10/550409_2458318194207_818717898_n.jpg',
-    what: 'Annual charitable gala event ‘Dhol Baje’ with a Dandiya night theme',
-    organizer: 'Rotaract Club of Manipal',
-    contact: [
-      {'Name': "Shubham", "ContactNum": "+91 8130180208"},
-      {'Name': "Shubham", "ContactNum": "+91 8130180208"}
-    ],
-  );
-
   @override
   Widget build(BuildContext context) {
+    ComingEvent _event =
+        Provider.of<EventViewModel>(context, listen: false).singleUpcomingEvent;
     return Scaffold(
       backgroundColor: Color(0xff131132),
       appBar: AppBar(
@@ -56,9 +46,9 @@ class UpcomingEvent extends StatelessWidget {
                 thickness: 1,
                 color: Color(0xffFC2E7E),
               ),
-              _infoColumn(_event.name, _event.what),
-              _infoColumn('Where', _event.where),
-              _infoColumn('When', _event.when),
+              _infoColumn(_event.name, _event.what, _event),
+              _infoColumn('Where', _event.where, _event),
+              _infoColumn('When', _event.when, _event),
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Container(
@@ -76,10 +66,10 @@ class UpcomingEvent extends StatelessWidget {
                   ),
                 ),
               ),
-              InfoCard(_event.contact[0]['Name'], 'phone',
-                  _event.contact[0]['ContactNum']),
-              InfoCard(_event.contact[1]['Name'], 'phone',
-                  _event.contact[1]['ContactNum']),
+              InfoCard(_event.contacts[0]['contactName'], 'phone',
+                  _event.contacts[0]['number']),
+              InfoCard(_event.contacts[1]['contactName'], 'phone',
+                  _event.contacts[1]['number']),
               Padding(
                 padding: EdgeInsets.all(10.0),
               ),
@@ -90,7 +80,7 @@ class UpcomingEvent extends StatelessWidget {
     );
   }
 
-  _infoColumn(String heading, String description) {
+  _infoColumn(String heading, String description, ComingEvent _event) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(

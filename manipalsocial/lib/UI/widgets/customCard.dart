@@ -23,10 +23,12 @@ class CustomCard extends StatelessWidget {
             ),
             child: Row(
               children: <Widget>[
-                CircleAvatar(
-                  backgroundImage: AssetImage(imageurl),
-                  radius: 40.0,
-                ),
+                (imageurl == null)
+                    ? Container()
+                    : CircleAvatar(
+                        backgroundImage: AssetImage(imageurl),
+                        radius: 40.0,
+                      ),
                 Padding(
                   padding: EdgeInsets.all(12.0),
                 ),

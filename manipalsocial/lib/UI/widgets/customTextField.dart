@@ -31,7 +31,7 @@ class CustomTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(40.0),
           ),
           child: TextField(
-            maxLines: 15,
+            maxLines: isPassword ? 1 : 15,
             minLines: 1,
             // expands: true,
             controller: controller,

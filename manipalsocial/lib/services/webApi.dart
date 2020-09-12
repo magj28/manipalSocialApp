@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class WebApi {
-  final String url = "https://0b7aac98cc63.ngrok.io/";
+  final String url = "https://manipal-social.herokuapp.com/";
   var networkError = {
     'success': false,
     'error': "Network Error.",
@@ -250,7 +250,7 @@ class WebApi {
   }
 
   Future<dynamic> getEvents(headers) async {
-    final apiUrl = url + 'events/list';
+    final apiUrl = url + 'event/list';
     var response, responseStatus;
     try {
       response = await http.get(apiUrl, headers: {'Authorization': headers});
@@ -277,7 +277,7 @@ class WebApi {
   }
 
   Future<dynamic> getUpcomingEvents(headers) async {
-    final apiUrl = url + 'events/upcomingEvents';
+    final apiUrl = url + 'event/upcomingEvents';
     var response, responseStatus;
     try {
       response = await http.get(apiUrl, headers: {'Authorization': headers});

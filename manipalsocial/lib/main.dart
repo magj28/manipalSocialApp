@@ -17,6 +17,8 @@ import 'package:manipalsocial/logic/viewModels/placeViewModel.dart';
 import 'package:manipalsocial/logic/viewModels/userViewModel.dart';
 import 'package:provider/provider.dart';
 
+import 'logic/viewModels/eventViewModel.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MultiProvider(providers: [
@@ -28,6 +30,9 @@ void main() {
     ),
     ChangeNotifierProvider.value(
       value: ExperienceViewModel(),
+    ),
+    ChangeNotifierProvider.value(
+      value: EventViewModel(),
     )
   ], child: MyApp()));
 }

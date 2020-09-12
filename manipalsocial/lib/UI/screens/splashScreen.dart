@@ -19,10 +19,10 @@ class Splash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authStatus = Provider.of<UserViewModel>(context).status;
     return SplashScreen(
-      seconds: 3,
-      navigateAfterSeconds:
-          decideScreen(Provider.of<UserViewModel>(context).status),
+      seconds: 2,
+      navigateAfterSeconds: decideScreen(authStatus),
       title: Text(
         'Manipal Social',
         style: TextStyle(

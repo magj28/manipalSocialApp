@@ -13,12 +13,14 @@ class EventViewModel with ChangeNotifier {
   List<ComingEvent> _upcomingEvents = List<ComingEvent>();
   bool _isFetchingData = false;
   String _errorMessage;
+  ComingEvent _singleUpcomingEvent;
 
   //getters
   bool get isFetchingData => _isFetchingData;
   String get errorMessage => _errorMessage;
   List<Event> get events => _events;
   List<ComingEvent> get upcomingevents => _upcomingEvents;
+  ComingEvent get singleUpcomingEvent => _singleUpcomingEvent;
 
   //setters
   setErrorMessage(value) {
@@ -31,6 +33,9 @@ class EventViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  setSingleUpcomingEvent(value) {
+    _singleUpcomingEvent = value;
+  }
 
   setEvents(value) {
     //clearing the previously filled data so that data doesn't get repeated
@@ -51,11 +56,12 @@ class EventViewModel with ChangeNotifier {
     _upcomingEvents.clear();
 
     //initializing arrays of events
-    var upcomingEvents = value['upcomingEvent'];
+    var upcomingEvents = value['upcomingEvents'];
 
     //adding in list of places objects
     for (int i = 0; i < upcomingEvents.length; i++) {
       _upcomingEvents.add(ComingEvent.fromJson(upcomingEvents[i]));
+      print(_upcomingEvents[i].contacts);
     }
 
     notifyListeners();

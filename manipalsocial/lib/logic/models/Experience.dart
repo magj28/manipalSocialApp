@@ -23,6 +23,6 @@ class Experience {
         experience = json['experience'],
         user = User.fromJson(json['user_id']),
         placeID = json['place_id'],
-        createdAt = dateTimeConver(json['createdAt']),
+        createdAt = dateConvert(json['createdAt']),
         likes = json["likes"];
 }

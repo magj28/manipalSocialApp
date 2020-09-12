@@ -34,7 +34,7 @@ class AddExperienceScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Text(
-              'Write Your Experience in ${singlePlace.singlePlace.name}',
+              'Write Your Experience at ${singlePlace.singlePlace.name}',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 20,

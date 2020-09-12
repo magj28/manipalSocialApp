@@ -3,20 +3,18 @@ import 'package:flutter/cupertino.dart';
 class Event {
   String mongooseId;
   String name;
-  String what;
+  String description;
   String organizer;
 
   Event(
       {@required this.mongooseId,
-        @required this.name,
-        @required this.what,
-        @required this.organizer});
+      @required this.name,
+      @required this.description,
+      @required this.organizer});
 
   Event.fromJson(Map<dynamic, dynamic> json)
       : mongooseId = json['_id'],
         name = json['name'],
-        what = json['what'],
+        description = json['description'],
         organizer = json['organizer'];
-
-
 }
