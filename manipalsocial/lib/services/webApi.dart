@@ -248,4 +248,85 @@ class WebApi {
       return error;
     }
   }
+
+  Future<dynamic> getEvents(headers) async {
+    final apiUrl = url + 'events/list';
+    var response, responseStatus;
+    try {
+      response = await http.get(apiUrl, headers: {'Authorization': headers});
+      responseStatus = json.decode(response.body)['status'];
+    } catch (e) {
+      print(e);
+      return networkError;
+    }
+    if (response.statusCode == 200 && responseStatus == "success") {
+      var eventData = {
+        'success': true,
+        'events': json.decode(response.body)['data']['events'],
+        'message': json.decode(response.body)['message']
+      };
+      return eventData;
+    } else {
+      var error = {
+        'success': false,
+        'error': json.decode(response.body)['error'],
+        'message': json.decode(response.body)['message']
+      };
+      return error;
+    }
+  }
+
+  Future<dynamic> getUpcomingEvents(headers) async {
+    final apiUrl = url + 'events/upcomingEvents';
+    var response, responseStatus;
+    try {
+      response = await http.get(apiUrl, headers: {'Authorization': headers});
+      responseStatus = json.decode(response.body)['status'];
+    } catch (e) {
+      print(e);
+      return networkError;
+    }
+    if (response.statusCode == 200 && responseStatus == "success") {
+      var upcomingEventData = {
+        'success': true,
+        'upcomingEvents': json.decode(response.body)['data']['upcomingEvents'],
+        'message': json.decode(response.body)['message']
+      };
+      return upcomingEventData;
+    } else {
+      var error = {
+        'success': false,
+        'error': json.decode(response.body)['error'],
+        'message': json.decode(response.body)['message']
+      };
+      return error;
+    }
+  }
+
+  Future<dynamic> getCabShares(headers, to, from, dateTime) async {
+    final apiUrl = url + 'cabs/getCabShares';
+    var response, responseStatus;
+    try {
+      response = await http.get(apiUrl, headers: {'Authorization': headers});
+      responseStatus = json.decode(response.body)['status'];
+    } catch (e) {
+      print(e);
+      return networkError;
+    }
+    if (response.statusCode == 200 && responseStatus == "success") {
+      var expData = {
+        'success': true,
+        'cabShareList': json.decode(response.body)['data']['cabShareList'],
+        'message': json.decode(response.body)['message']
+      };
+      return expData;
+    } else {
+      var error = {
+        'success': false,
+        'error': json.decode(response.body)['error'],
+        'message': json.decode(response.body)['message']
+      };
+      return error;
+    }
+  }
 }
