@@ -249,6 +249,32 @@ class WebApi {
     }
   }
 
+  Future<dynamic> deleteChat(headers, chatID) async {
+    final apiUrl = url + 'chats/deleteChat/$chatID';
+    var response, responseStatus;
+    try {
+      response = await http.delete(apiUrl, headers: {'Authorization': headers});
+      responseStatus = json.decode(response.body)['status'];
+    } catch (e) {
+      print(e);
+      return networkError;
+    }
+    if (response.statusCode == 200 && responseStatus == "success") {
+      var deletedChatData = {
+        'success': true,
+        'message': json.decode(response.body)['message']
+      };
+      return deletedChatData;
+    } else {
+      var error = {
+        'success': false,
+        'error': json.decode(response.body)['error'],
+        'message': json.decode(response.body)['message']
+      };
+      return error;
+    }
+  }
+
   Future<dynamic> getEvents(headers) async {
     final apiUrl = url + 'event/list';
     var response, responseStatus;
@@ -307,7 +333,9 @@ class WebApi {
     final apiUrl = url + 'cabs/getCabShares';
     var response, responseStatus;
     try {
-      response = await http.get(apiUrl, headers: {'Authorization': headers});
+      response = await http.post(apiUrl,
+          headers: {'Authorization': headers},
+          body: {'to': to, 'from': from, 'dateTime': dateTime});
       responseStatus = json.decode(response.body)['status'];
     } catch (e) {
       print(e);

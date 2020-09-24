@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //View models objects using provider
-    final event = Provider.of<EventViewModel>(context, listen: false);
+    final event = Provider.of<EventViewModel>(context);
 
     return Scaffold(
       drawer: DrawerScreen(),
@@ -190,8 +190,8 @@ class DrawerScreen extends StatelessWidget {
                     ),
                     child: CircleAvatar(
                       radius: 50,
-                      backgroundImage: NetworkImage(
-                          'https://istemanipal.com/media/DPs/Shubham_Pathak.jpeg'),
+                      backgroundImage:
+                          AssetImage('assets/images/userAvatar.png'),
                     ),
                   ),
                 ),

@@ -4,17 +4,24 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:manipalsocial/UI/widgets/infoCard.dart';
 import 'package:manipalsocial/UI/widgets/pinkButton.dart';
+import 'package:manipalsocial/logic/viewModels/cabShareViewModel.dart';
+import 'package:manipalsocial/logic/viewModels/userViewModel.dart';
+import 'package:provider/provider.dart';
 
-DateTime selectedDate;
-
-class CarPage extends StatefulWidget {
+class CabShareScreen extends StatefulWidget {
   @override
-  _CarPageState createState() => _CarPageState();
+  _CabShareScreenState createState() => _CabShareScreenState();
 }
 
-class _CarPageState extends State<CarPage> {
+class _CabShareScreenState extends State<CabShareScreen> {
+  DateTime selectedDate;
+  String to = "manipal";
+  String from = "manglore";
+  var cabViewModel;
+
   @override
   Widget build(BuildContext context) {
+    cabViewModel = Provider.of<CabViewModel>(context);
     return Scaffold(
       backgroundColor: Color(0xff131132),
       appBar: AppBar(
@@ -68,9 +75,27 @@ class _CarPageState extends State<CarPage> {
                       Text('From',
                           style: TextStyle(
                               color: Color(0xff1B90CE), fontSize: 20)),
-                      ToAndFrom(
-                        'Manipal',
-                      ),
+                      DropdownButton<String>(
+                        dropdownColor: Color(0xff1D1D3E),
+                        value: to,
+                        elevation: 16,
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        underline: Container(
+                          color: Colors.pinkAccent,
+                        ),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            to = newValue;
+                          });
+                        },
+                        items: <String>['manipal', 'manglore', 'udupi']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      )
                     ],
                   ),
                   Column(
@@ -78,7 +103,27 @@ class _CarPageState extends State<CarPage> {
                       Text('To',
                           style: TextStyle(
                               color: Color(0xff1B90CE), fontSize: 20)),
-                      ToAndFrom('Manipal'),
+                      DropdownButton<String>(
+                        dropdownColor: Color(0xff1D1D3E),
+                        value: from,
+                        elevation: 16,
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        underline: Container(
+                          color: Colors.pinkAccent,
+                        ),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            from = newValue;
+                          });
+                        },
+                        items: <String>['manipal', 'manglore', 'udupi']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
                     ],
                   )
                 ],
@@ -107,11 +152,26 @@ class _CarPageState extends State<CarPage> {
                               itemStyle: TextStyle(color: Colors.white)),
                           onConfirm: (date) {
                         selectedDate = date;
+
+                        //final date and time
                         print(selectedDate);
                       }, currentTime: DateTime.now());
                     }, currentTime: DateTime.now(), locale: LocaleType.en);
                   }),
-              PinkButton(buttonText: 'Search', onPress: () {}),
+
+              //Search button
+              PinkButton(
+                  buttonText: 'Search',
+                  onPress: () async {
+                    print(to);
+                    print(from);
+                    print(selectedDate);
+                    String headers =
+                        Provider.of<UserViewModel>(context, listen: false)
+                            .headers;
+                    await cabViewModel.getCabShares(
+                        headers, to, from, selectedDate.toIso8601String());
+                  }),
               SizedBox(
                 height: 10,
               ),
@@ -129,17 +189,19 @@ class _CarPageState extends State<CarPage> {
                     letterSpacing: 2,
                     fontSize: 20),
               ),
-              ListView(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                children: <Widget>[
-                  InfoCard('Sumit Reddy At 6:30 PM', 'phone', '+91 8130180208'),
-                  InfoCard(
-                      'Prateek hiremath At 6:30 PM', 'phone', '+91 8130180208'),
-                  InfoCard('Sanjay At 6:30 PM', 'phone', '+91 8130180208'),
-                  InfoCard('Akhram At 6:30 PM', 'phone', '+91 8130180208'),
-                ],
-              ),
+              cabViewModel
+                      .isFetchingData //to show a progress indicator while its fetching data
+                  ? Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: cabViewModel.cabShareList.length,
+                      itemBuilder: (context, index) {
+                        return InfoCard(
+                            '${cabViewModel.cabShareList[index].user.name} At ${cabViewModel.cabShareList[index].dateTime}',
+                            'phone',
+                            '+91 ${cabViewModel.cabShareList[index].user.phoneNumber}');
+                      }),
               SizedBox(
                 height: 20,
               ),
