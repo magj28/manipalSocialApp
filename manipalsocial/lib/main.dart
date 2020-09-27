@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:manipalsocial/UI/screens/ContactUs.dart';
+import 'package:manipalsocial/UI/screens/OurTeam.dart';
 import 'package:manipalsocial/UI/screens/addExperience.dart';
 import 'package:manipalsocial/UI/screens/cabShareScreen.dart';
 import 'package:manipalsocial/UI/screens/chatScreen.dart';
@@ -64,6 +66,8 @@ class MyApp extends StatelessWidget {
         '/chat': (context) => ChatScreen(),
         '/upcomingEvent': (context) => UpcomingEvent(),
         '/event': (context) => EventScreen(),
+        '/contact':(context) => ContactUs(),
+        '/team':(context) => OurTeam(),
       },
     );
   }

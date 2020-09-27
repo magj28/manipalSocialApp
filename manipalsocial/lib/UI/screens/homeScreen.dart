@@ -139,16 +139,20 @@ class HomeScreen extends StatelessWidget {
             ),
             PinkButton(
               buttonText: 'Contact Us',
-              onPress: () {},
+              onPress: () {
+                Navigator.pushNamed(context, '/contact');
+              },
             ),
             PinkButton(
               buttonText: ' Our Team ',
-              onPress: () {},
+              onPress: () {
+                Navigator.pushNamed(context, '/team');
+              },
             ),
-            PinkButton(
-              buttonText: ' About Us ',
-              onPress: () {},
-            ),
+            // PinkButton(
+            //   buttonText: ' About Us ',
+            //   onPress: () {},
+            // ),
             SizedBox(
               height: 20.0,
             ),
@@ -205,12 +209,102 @@ class DrawerScreen extends StatelessWidget {
             endIndent: 50,
           ),
           ListTile(
-            title: Text(
-              'Logout',
-              style: TextStyle(
-                  color: Color(0xff1B90CE),
-                  fontSize: 17.0,
-                  fontWeight: FontWeight.bold),
+            title: Center(
+              child: Text(
+                'Places To Visit',
+                style: TextStyle(
+                    color: Color(0xff1B90CE),
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            onTap: () {
+              String headers =
+                  Provider.of<UserViewModel>(context, listen: false)
+                      .headers;
+              Provider.of<PlaceViewModel>(context, listen: false)
+                  .getPlaces(headers);
+              Navigator.pushNamed(context, '/place');
+          },
+          ),
+          ListTile(
+            title: Center(
+              child: Text(
+                'Events at Manipal',
+                style: TextStyle(
+                    color: Color(0xff1B90CE),
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            onTap: () {
+              String headers =
+                  Provider.of<UserViewModel>(context, listen: false)
+                      .headers;
+              Provider.of<EventViewModel>(context, listen: false)
+                  .getEvents(headers);
+              Provider.of<EventViewModel>(context, listen: false)
+                  .getUpcomingEvents(headers);
+              Navigator.pushNamed(context, '/event');
+            },
+          ),
+          ListTile(
+            title: Center(
+              child: Text(
+                'Community Chat',
+                style: TextStyle(
+                    color: Color(0xff1B90CE),
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, '/chat');
+            },
+          ),
+          ListTile(
+            title: Center(
+              child: Text(
+                'Cab Sharing',
+                style: TextStyle(
+                    color: Color(0xff1B90CE),
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, '/cabShare');
+            },
+          ),
+          Divider(
+            thickness: 1,
+            color: Color(0xffFC2E7E),
+            indent: 50,
+            endIndent: 50,
+          ),
+          ListTile(
+            title: Center(
+              child: Text(
+                'Contact Us',
+                style: TextStyle(
+                    color: Color(0xff1B90CE),
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, '/contact');
+            },
+          ),
+          ListTile(
+            title: Center(
+              child: Text(
+                'Logout',
+                style: TextStyle(
+                    color: Color(0xff1B90CE),
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
             onTap: () {
               Provider.of<UserViewModel>(context, listen: false).logOut();
