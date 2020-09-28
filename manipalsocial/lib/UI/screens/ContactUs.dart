@@ -19,69 +19,85 @@ class ContactUs extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Container(
             width: MediaQuery.of(context).size.width,
-            child: Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Center(
                     child: Image(
                         width: MediaQuery.of(context).size.width / 2.5,
                         image: AssetImage("assets/images/istelogo.jpg"),
                         fit: BoxFit.cover),
                   ),
-                  Text("About",
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom:15.0),
+                  child: Text("About",
                       style: TextStyle(
                           color: Color(0xff1B90CE),
                           fontSize: 17.0,
                           fontWeight: FontWeight.bold)),
-                  Text(
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom:20.0),
+                  child: Text(
                       "ISTE Manipal is a student chapter under Indian Society For Technical Education. This multidomain club organises workshops and events for tech aficionados.",
                       style: TextStyle(
-                        color: Color(0xff1B90CE),
+                        color: Colors.white,
                         fontSize: 15.0,
                       )),
-                  Text("Contact Us",
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom:15.0),
+                  child: Text("Contact Us",
                       style: TextStyle(
                           color: Color(0xff1B90CE),
                           fontSize: 17.0,
                           fontWeight: FontWeight.bold)),
-                  Row(
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom:8.0),
+                  child: Row(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Icon(
                           Icons.edit,
                           size: 20,
-                          color: Color(0xff1B90CE),
+                          color: Colors.white,
                         ),
                       ),
                       Text("contactus@istemanipal.com",
                           style: TextStyle(
-                            color: Color(0xff1B90CE),
+                            color: Colors.white,
                             fontSize: 15.0,
                           )),
                     ],
                   ),
-                  Row(
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom:8.0),
+                  child: Row(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Icon(
                           Icons.call,
                           size: 20,
-                          color: Color(0xff1B90CE),
+                          color: Colors.white,
                         ),
                       ),
                       Text("8130180208",
                           style: TextStyle(
-                            color: Color(0xff1B90CE),
+                            color:Colors.white,
                             fontSize: 15.0,
                           )),
                     ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ));

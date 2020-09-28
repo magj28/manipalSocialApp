@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manipalsocial/UI/widgets/alertDialog.dart';
 import 'package:manipalsocial/UI/widgets/homeScreenCard.dart';
 import 'package:manipalsocial/UI/widgets/pinkButton.dart';
 import 'package:manipalsocial/UI/widgets/promoCard.dart';
@@ -35,7 +36,27 @@ class HomeScreen extends StatelessWidget {
                           'No upcoming events!',
                           'There are no upcoming events in manipal.',
                           "Don't worry we'll keep you updated.",
-                          () {})
+                          () async {
+                            String headers = Provider.of<UserViewModel>(context,
+                                    listen: false)
+                                .headers;
+                            bool success = await Provider.of<EventViewModel>(
+                                    context,
+                                    listen: false)
+                                .getUpcomingEvents(headers);
+                            if (success == true) {
+                              Navigator.pushNamed(context, '/upcomingEvent');
+                            } else {
+                              showMyDialog(
+                                  context,
+                                  'Oops!',
+                                  'Looks like something went wrong.',
+                                  Provider.of<EventViewModel>(context,
+                                          listen: false)
+                                      .errorMessage);
+                            }
+                          },
+                        )
                       : ListView.builder(
                           // shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
@@ -45,10 +66,28 @@ class HomeScreen extends StatelessWidget {
                                 'assets/images/promoCard.png',
                                 event.upcomingevents[index].name,
                                 event.upcomingevents[index].where,
-                                event.upcomingevents[index].when, () {
+                                event.upcomingevents[index].when, () async {
                               event.setSingleUpcomingEvent(
                                   event.upcomingevents[index]);
-                              Navigator.pushNamed(context, '/upcomingEvent');
+                              String headers = Provider.of<UserViewModel>(
+                                      context,
+                                      listen: false)
+                                  .headers;
+                              bool success = await Provider.of<EventViewModel>(
+                                      context,
+                                      listen: false)
+                                  .getUpcomingEvents(headers);
+                              if (success == true) {
+                                Navigator.pushNamed(context, '/upcomingEvent');
+                              } else {
+                                showMyDialog(
+                                    context,
+                                    'Oops!',
+                                    'Looks like something went wrong.',
+                                    Provider.of<EventViewModel>(context,
+                                            listen: false)
+                                         .errorMessage);
+                              }
                             });
                           },
                         ),
@@ -75,15 +114,28 @@ class HomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                HomeScreenCard('Places to Visit', 'assets/images/places.png',
-                    () {
-                  String headers =
-                      Provider.of<UserViewModel>(context, listen: false)
-                          .headers;
-                  Provider.of<PlaceViewModel>(context, listen: false)
-                      .getPlaces(headers);
-                  Navigator.pushNamed(context, '/place');
-                }),
+                HomeScreenCard(
+                  'Places to Visit',
+                  'assets/images/places.png',
+                  () async {
+                    String headers =
+                        Provider.of<UserViewModel>(context, listen: false)
+                            .headers;
+                    bool success = await Provider.of<PlaceViewModel>(context,
+                            listen: false)
+                        .getPlaces(headers);
+                    if (success == true) {
+                      Navigator.pushNamed(context, '/place');
+                    } else {
+                      showMyDialog(
+                          context,
+                          'Oops!',
+                          'Looks like something went wrong.',
+                          Provider.of<PlaceViewModel>(context, listen: false)
+                              .errorMessage);
+                    }
+                  },
+                ),
                 HomeScreenCard('Cab Share', 'assets/images/cab.png', () {
                   Navigator.pushNamed(context, '/cabShare');
                 }),
@@ -96,15 +148,25 @@ class HomeScreen extends StatelessWidget {
                   Navigator.pushNamed(context, '/chat');
                 }),
                 HomeScreenCard('Events of Manipal', 'assets/images/event.png',
-                    () {
+                    () async {
                   String headers =
                       Provider.of<UserViewModel>(context, listen: false)
                           .headers;
-                  Provider.of<EventViewModel>(context, listen: false)
-                      .getEvents(headers);
+                  bool success =
+                      await Provider.of<EventViewModel>(context, listen: false)
+                          .getEvents(headers);
                   Provider.of<EventViewModel>(context, listen: false)
                       .getUpcomingEvents(headers);
-                  Navigator.pushNamed(context, '/event');
+                  if (success == true) {
+                    Navigator.pushNamed(context, '/event');
+                  } else {
+                    showMyDialog(
+                        context,
+                        'Oops!',
+                        'Looks like something went wrong.',
+                        Provider.of<EventViewModel>(context, listen: false)
+                            .errorMessage);
+                  }
                 }),
               ],
             ),
@@ -218,14 +280,23 @@ class DrawerScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
             ),
-            onTap: () {
+            onTap: () async {
               String headers =
-                  Provider.of<UserViewModel>(context, listen: false)
-                      .headers;
-              Provider.of<PlaceViewModel>(context, listen: false)
-                  .getPlaces(headers);
-              Navigator.pushNamed(context, '/place');
-          },
+                  Provider.of<UserViewModel>(context, listen: false).headers;
+              bool success =
+                  await Provider.of<PlaceViewModel>(context, listen: false)
+                      .getPlaces(headers);
+              if (success == true) {
+                Navigator.pushNamed(context, '/place');
+              } else {
+                showMyDialog(
+                    context,
+                    'Oops!',
+                    'Looks like something went wrong.',
+                    Provider.of<PlaceViewModel>(context, listen: false)
+                        .errorMessage);
+              }
+            },
           ),
           ListTile(
             title: Center(
@@ -237,15 +308,24 @@ class DrawerScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
             ),
-            onTap: () {
+            onTap: () async {
               String headers =
-                  Provider.of<UserViewModel>(context, listen: false)
-                      .headers;
-              Provider.of<EventViewModel>(context, listen: false)
-                  .getEvents(headers);
+                  Provider.of<UserViewModel>(context, listen: false).headers;
+              bool success =
+                  await Provider.of<EventViewModel>(context, listen: false)
+                      .getEvents(headers);
               Provider.of<EventViewModel>(context, listen: false)
                   .getUpcomingEvents(headers);
-              Navigator.pushNamed(context, '/event');
+              if (success == true) {
+                Navigator.pushNamed(context, '/event');
+              } else {
+                showMyDialog(
+                    context,
+                    'Oops!',
+                    'Looks like something went wrong.',
+                    Provider.of<EventViewModel>(context, listen: false)
+                        .errorMessage);
+              }
             },
           ),
           ListTile(

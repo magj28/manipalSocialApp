@@ -3,7 +3,7 @@ import 'package:manipalsocial/logic/models/CabShare.dart';
 import 'package:manipalsocial/logic/viewModels/userViewModel.dart';
 import 'package:manipalsocial/services/webApi.dart';
 
-class EventViewModel with ChangeNotifier {
+class CabShareViewModel with ChangeNotifier {
   //making instance of web api to use their function
   WebApi api = WebApi();
   UserViewModel user = UserViewModel();

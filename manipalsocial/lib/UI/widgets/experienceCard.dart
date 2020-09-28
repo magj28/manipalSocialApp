@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:manipalsocial/UI/widgets/alertDialog.dart';
 import 'package:manipalsocial/logic/viewModels/experienceViewModel.dart';
 import 'package:manipalsocial/logic/viewModels/userViewModel.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +26,7 @@ class ExperienceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: MediaQuery.of(context).size.width,
       margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Color(0xff1D1D3E),
@@ -121,7 +123,7 @@ class _LikeButtonState extends State<LikeButton> {
             color: liked ? Colors.red : Colors.white,
             size: 35,
           ),
-          onPressed: () {
+          onPressed: () async {
             String type;
             setState(() {
               if (liked == true) {
@@ -134,8 +136,17 @@ class _LikeButtonState extends State<LikeButton> {
             });
             String headers =
                 Provider.of<UserViewModel>(context, listen: false).headers;
-            Provider.of<ExperienceViewModel>(context, listen: false)
-                .updateLikes(headers, widget.expID, type);
+            bool success= await Provider.of<ExperienceViewModel>(context, listen: false).updateLikes(headers, widget.expID, type);
+            if(!success)
+              {
+                showMyDialog(
+                    context,
+                    'Oops!',
+                    'Looks like something went wrong.',
+                    Provider.of<ExperienceViewModel>(context,
+                        listen: false)
+                        .errorMessage);
+              }
           },
         ),
         Text(
@@ -174,15 +185,36 @@ class _PopUpMenuState extends State<PopUpMenu> {
           //delete the experience
           String headers =
               Provider.of<UserViewModel>(context, listen: false).headers;
-          Provider.of<ExperienceViewModel>(context, listen: false)
+          bool success= await Provider.of<ExperienceViewModel>(context, listen: false)
               .deleteExperience(headers, widget.expID);
+          if(!success)
+          {
+            showMyDialog(
+                context,
+                'Oops!',
+                'Looks like something went wrong.',
+                Provider.of<ExperienceViewModel>(context,
+                    listen: false)
+                    .errorMessage);
+          }
         } else if (result == options.edit) {
           //edit the experience by changing the operation type
           Provider.of<ExperienceViewModel>(context, listen: false)
               .setOperation(Operation.Edit);
-          Provider.of<ExperienceViewModel>(context, listen: false)
+          bool success= await Provider.of<ExperienceViewModel>(context, listen: false)
               .setExpID(widget.expID);
-          Navigator.pushNamed(context, '/addExperience');
+          if(success == true){
+            Navigator.pushNamed(context, '/addExperience');
+          }
+          else {
+            showMyDialog(
+                context,
+                'Oops!',
+                'Looks like something went wrong.',
+                Provider.of<ExperienceViewModel>(context,
+                    listen: false)
+                    .errorMessage);
+          }
         }
       },
       itemBuilder: (BuildContext context) => <PopupMenuEntry<options>>[

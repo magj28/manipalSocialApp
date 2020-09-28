@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:manipalsocial/UI/widgets/alertDialog.dart';
 import 'package:manipalsocial/UI/widgets/pinkButton.dart';
 import 'package:manipalsocial/logic/models/Place.dart';
 import 'package:manipalsocial/logic/viewModels/experienceViewModel.dart';
@@ -48,7 +49,7 @@ class PlaceSingleScreen extends StatelessWidget {
                 children: [
                   PinkButton(
                     buttonText: 'Experiences',
-                    onPress: () {
+                    onPress: () async{
                       String headers =
                           Provider.of<UserViewModel>(context, listen: false)
                               .headers;
@@ -56,9 +57,19 @@ class PlaceSingleScreen extends StatelessWidget {
                           Provider.of<PlaceViewModel>(context, listen: false)
                               .singlePlace
                               .mongooseId;
-                      Provider.of<ExperienceViewModel>(context, listen: false)
+                      bool success =
+                      await Provider.of<ExperienceViewModel>(context, listen: false)
                           .getExperiences(headers, placeID);
-                      Navigator.pushNamed(context, '/experience');
+                      if (success == true) {
+                        Navigator.pushNamed(context, '/experience');
+                      } else {
+                        showMyDialog(
+                            context,
+                            'Oops!',
+                            'Looks like something went wrong.',
+                            Provider.of<ExperienceViewModel>(context, listen: false)
+                                .errorMessage);
+                      }
                     },
                   ),
                   PinkButton(

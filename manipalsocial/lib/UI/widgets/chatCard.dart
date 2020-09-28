@@ -20,7 +20,8 @@ class ChatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
+        width: MediaQuery.of(context).size.width,
+        margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Color(0xff1D1D3E),
         borderRadius: BorderRadius.circular(20),
@@ -45,13 +46,13 @@ class ChatCard extends StatelessWidget {
                       style: TextStyle(
                           color: Color(0xff1B90CE),
                           fontWeight: FontWeight.bold,
-                          fontSize: 15)),
+                          fontSize: 13)),
                   Text(email,
                       softWrap: true,
                       style: TextStyle(
                           color: Color(0xffFC2E7E),
                           fontWeight: FontWeight.bold,
-                          fontSize: 13)),
+                          fontSize: 10)),
                   Text(date,
                       style: TextStyle(
                           color: Color(0xffFC2E7E),

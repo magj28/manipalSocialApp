@@ -2,8 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:manipalsocial/UI/widgets/alertDialog.dart';
 import 'package:manipalsocial/UI/widgets/infoCard.dart';
 import 'package:manipalsocial/UI/widgets/pinkButton.dart';
+import 'package:manipalsocial/logic/viewModels/userViewModel.dart';
+import 'package:manipalsocial/logic/viewModels/cabShareViewModel.dart';
+import 'package:provider/provider.dart';
 
 DateTime selectedDate;
 
@@ -111,7 +115,27 @@ class _CarPageState extends State<CarPage> {
                       }, currentTime: DateTime.now());
                     }, currentTime: DateTime.now(), locale: LocaleType.en);
                   }),
-              PinkButton(buttonText: 'Search', onPress: () {}),
+              PinkButton(buttonText: 'Search', onPress:
+                  () async{
+                // String headers = Provider.of<UserViewModel>(context,
+                //     listen: false)
+                //     .headers;
+                // bool success = await Provider.of<CabShareViewModel>(
+                //     context,
+                //     listen: false)
+                //     .getCabShares(headers, , ,);
+                // if (success == true) {
+                //   Navigator.pushNamed(context, '/cabShare');
+                // } else {
+                //   showMyDialog(
+                //       context,
+                //       'Oops!',
+                //       'Looks like something went wrong.',
+                //       Provider.of<CabShareViewModel>(context,
+                //           listen: false)
+                //           .errorMessage);
+                // }
+              }),
               SizedBox(
                 height: 10,
               ),

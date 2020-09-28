@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manipalsocial/UI/widgets/alertDialog.dart';
 import 'package:manipalsocial/UI/widgets/customTextField.dart';
 import 'package:manipalsocial/UI/widgets/pinkButton.dart';
 import 'package:manipalsocial/logic/viewModels/experienceViewModel.dart';
@@ -56,7 +57,7 @@ class AddExperienceScreen extends StatelessWidget {
           ),
           PinkButton(
             buttonText: 'Submit',
-            onPress: () {
+            onPress: ()async {
               //finding headers and place if to send in the request
               String headers =
                   Provider.of<UserViewModel>(context, listen: false).headers;
@@ -66,11 +67,31 @@ class AddExperienceScreen extends StatelessWidget {
               Operation op = exp.operation;
               if (op == Operation.Create) {
                 //create a new experience
-                exp.createExperience(headers, placeID, expController.text);
+                bool success= await exp.createExperience(headers, placeID, expController.text);
+                if(!success)
+                {
+                  showMyDialog(
+                      context,
+                      'Oops!',
+                      'Looks like something went wrong.',
+                      Provider.of<ExperienceViewModel>(context,
+                          listen: false)
+                          .errorMessage);
+                }
               } else {
                 //Update experience
                 String expID = exp.expID;
-                exp.editExperience(headers, expID, placeID, expController.text);
+                bool success= await exp.editExperience(headers, expID, placeID, expController.text);
+                if(!success)
+                {
+                  showMyDialog(
+                      context,
+                      'Oops!',
+                      'Looks like something went wrong.',
+                      Provider.of<ExperienceViewModel>(context,
+                          listen: false)
+                          .errorMessage);
+                }
               }
               Navigator.pop(context);
             },
