@@ -21,5 +21,5 @@ class CabShare {
         to = json['to'],
         from = json['from'],
         user = User.fromJson(json['user_id']),
-        dateTime = dateConvert(json['dateTime']);
+        dateTime = timeConvert(json['dateTime']);
 }

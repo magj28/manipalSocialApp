@@ -3,7 +3,7 @@ import 'package:manipalsocial/logic/models/CabShare.dart';
 import 'package:manipalsocial/logic/viewModels/userViewModel.dart';
 import 'package:manipalsocial/services/webApi.dart';
 
-class CabShareViewModel with ChangeNotifier {
+class CabViewModel with ChangeNotifier {
   //making instance of web api to use their function
   WebApi api = WebApi();
   UserViewModel user = UserViewModel();
@@ -28,7 +28,6 @@ class CabShareViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-
   setCabShares(value) {
     //clearing the previously filled data so that data doesn't get repeated
     _cabShareList.clear();
@@ -44,8 +43,7 @@ class CabShareViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-
-  Future<bool> getCabShares(headers, to,from, dateTime) async {
+  Future<bool> getCabShares(headers, to, from, dateTime) async {
     setFetchingData(true);
     var cabShareList = await api.getCabShares(headers, to, from, dateTime);
     if (cabShareList['success'] == true) {
@@ -58,5 +56,4 @@ class CabShareViewModel with ChangeNotifier {
       return false;
     }
   }
-
 }

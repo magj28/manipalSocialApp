@@ -45,8 +45,7 @@ class ProfileScreen extends StatelessWidget {
                 backgroundColor: Color(0xffFC2E7E),
                 child: CircleAvatar(
                   radius: 50,
-                  backgroundImage: NetworkImage(
-                      'https://istemanipal.com/media/DPs/Shubham_Pathak.jpeg'),
+                  backgroundImage: AssetImage('assets/images/userAvatar.png'),
                 ),
               ),
             ),

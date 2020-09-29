@@ -1,70 +1,120 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:manipalsocial/UI/widgets/chatCard.dart';
 import 'package:manipalsocial/UI/widgets/customTextField.dart';
+import 'package:manipalsocial/logic/viewModels/userViewModel.dart';
+import 'package:provider/provider.dart';
+import 'package:web_socket_channel/io.dart';
 
-class ChatScreen extends StatelessWidget {
-  var names = [
-    'Shubham Pathak',
-    'Sarath Chandra Reddy',
-    'Almas Ahsruf Khan',
-    'Sarthak Nitin Khandelwal'
-  ];
-  var email = [
-    'smartshubhampathak@gmail.com',
-    'almasAshurfkhan@gmail.com',
-    'asdsdanfbksadbf@gmail.com',
-    'asfd@gmail.com'
-  ];
-  var likes = ['300', '350', '400', '450'];
-  var date = ['6/8/2020', '7/8/2020', '8/8/2020', '9/8/2020'];
-  String experience =
-      'One of the most happening beach in the region. Located around 8 km from udupi.\nBest time to visit is Nov-Feb,otherwise its going to be really hot out there. One of the most happening beach in the region. Located around 8 km from udupi.\nBest time to visit is Nov-Feb,otherwise its going to be really hot out there. One of the most happening beach in the region. Located around 8 km from udupi.\nBest time to visit is Nov-Feb,otherwise its going to be really hot out there. One of the most happening beach in the region. Located around 8 km from udupi.\nBest time to visit is Nov-Feb,otherwise its going to be really hot out there';
+class ChatScreen extends StatefulWidget {
+  @override
+  _ChatScreenState createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  var channel;
+  TextEditingController _chatController;
+  @override
+  void initState() {
+    channel = IOWebSocketChannel.connect('wss://manipal-social.herokuapp.com');
+    _chatController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    channel.sink.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Expanded(
-            child: CustomTextField(
-              hintMessage: 'Type here...',
-              isPassword: false,
-            ),
-          ),
-          IconButton(
-              icon: Icon(
-                Icons.send,
-                color: Color(0xffFC2E7E),
+        bottomSheet: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Expanded(
+              child: CustomTextField(
+                controller: _chatController,
+                hintMessage: 'Type here...',
+                isPassword: false,
               ),
-              onPressed: () {}),
-        ],
-      ),
-      backgroundColor: Color(0xff131132),
-      appBar: AppBar(
-        backgroundColor: Color(0xff131132),
-        title: Text(
-          'Community Chat',
-          style: TextStyle(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),
+            ),
+            IconButton(
+                icon: Icon(
+                  Icons.send,
+                  color: Color(0xffFC2E7E),
+                ),
+                onPressed: () {
+                  if (_chatController.text.isNotEmpty) {
+                    var user =
+                        Provider.of<UserViewModel>(context, listen: false).user;
+                    var newMessage = {
+                      'name': user.name,
+                      'email': user.email,
+                      'message': _chatController.text,
+                      'jwtToken':
+                          Provider.of<UserViewModel>(context, listen: false)
+                              .jwtToken
+                    };
+                    String jsonNewMsg = json.encode(newMessage);
+                    channel.sink.add(jsonNewMsg);
+                    _chatController.text = "";
+                  }
+                }),
+          ],
         ),
-        centerTitle: true,
-        elevation: 0,
-      ),
-      body: ListView.builder(
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        itemCount: 4,
-        itemBuilder: (context, index) {
-          return ChatCard(
-              name: names[index],
-              email: email[index],
-              date: date[index],
-              likes: likes[index],
-              experience: experience);
-        },
-      ),
-    );
+        backgroundColor: Color(0xff131132),
+        appBar: AppBar(
+          backgroundColor: Color(0xff131132),
+          title: Text(
+            'Community Chat',
+            style: TextStyle(
+                color: Colors.white, fontSize: 20, fontWeight: FontWeight.w600),
+          ),
+          centerTitle: true,
+          elevation: 0,
+        ),
+        body: StreamBuilder(
+          stream: channel.stream,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              if (snapshot.data.length > 0) {
+                var chats = json.decode(snapshot.data);
+                var reversedchats = new List.from(chats.reversed);
+
+                return ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemCount: reversedchats.length,
+                  itemBuilder: (context, index) {
+                    // return Text(
+                    //   reversedchats[index].toString(),
+                    //   style: TextStyle(color: Colors.white),
+                    // );
+                    return ChatCard(
+                        mongooseID: reversedchats[index]['_id'],
+                        name: reversedchats[index]['name'],
+                        email: reversedchats[index]['email'],
+                        message: reversedchats[index]['message']);
+                  },
+                );
+              } else {
+                return Center(
+                  child: Text(
+                    'No chats to show.',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                );
+              }
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ));
   }
 }
