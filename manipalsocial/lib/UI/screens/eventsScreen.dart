@@ -77,7 +77,7 @@ class EventScreen extends StatelessWidget {
                   //   bool success = await Provider.of<EventViewModel>(
                   //       context,
                   //       listen: false)
-                  //       .getUpcomingEvents(headers);
+                  //      .getUpcomingEvents(headers);
                   //   if (success == true) {
                   //     Navigator.pushNamed(context, '/upcomingEvent');
                   //   } else {

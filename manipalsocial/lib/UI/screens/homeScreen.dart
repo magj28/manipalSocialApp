@@ -35,28 +35,30 @@ class HomeScreen extends StatelessWidget {
                           'assets/images/promoCard.png',
                           'No upcoming events!',
                           'There are no upcoming events in manipal.',
-                          "Don't worry we'll keep you updated.",
-                          () async {
-                            String headers = Provider.of<UserViewModel>(context,
-                                    listen: false)
-                                .headers;
-                            bool success = await Provider.of<EventViewModel>(
-                                    context,
-                                    listen: false)
-                                .getUpcomingEvents(headers);
-                            if (success == true) {
-                              Navigator.pushNamed(context, '/upcomingEvent');
-                            } else {
-                              showMyDialog(
-                                  context,
-                                  'Oops!',
-                                  'Looks like something went wrong.',
-                                  Provider.of<EventViewModel>(context,
-                                          listen: false)
-                                      .errorMessage);
-                            }
-                          },
-                        )
+                          "Don't worry we'll keep you updated.", () {
+                          Navigator.pushNamed(context, '/upcomingEvent');
+                        }
+                          // () async {
+                          //   String headers = Provider.of<UserViewModel>(context,
+                          //           listen: false)
+                          //       .headers;
+                          //   bool success = await Provider.of<EventViewModel>(
+                          //           context,
+                          //           listen: false)
+                          //       .getUpcomingEvents(headers);
+                          //   if (success == true) {
+                          //     Navigator.pushNamed(context, '/upcomingEvent');
+                          //   } else {
+                          //     showMyDialog(
+                          //         context,
+                          //         'Oops!',
+                          //         'Looks like something went wrong.',
+                          //         Provider.of<EventViewModel>(context,
+                          //                 listen: false)
+                          //             .errorMessage);
+                          //   }
+                          // },
+                          )
                       : ListView.builder(
                           // shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
@@ -66,28 +68,10 @@ class HomeScreen extends StatelessWidget {
                                 'assets/images/promoCard.png',
                                 event.upcomingevents[index].name,
                                 event.upcomingevents[index].where,
-                                event.upcomingevents[index].when, () async {
+                                event.upcomingevents[index].when, () {
                               event.setSingleUpcomingEvent(
                                   event.upcomingevents[index]);
-                              String headers = Provider.of<UserViewModel>(
-                                      context,
-                                      listen: false)
-                                  .headers;
-                              bool success = await Provider.of<EventViewModel>(
-                                      context,
-                                      listen: false)
-                                  .getUpcomingEvents(headers);
-                              if (success == true) {
-                                Navigator.pushNamed(context, '/upcomingEvent');
-                              } else {
-                                showMyDialog(
-                                    context,
-                                    'Oops!',
-                                    'Looks like something went wrong.',
-                                    Provider.of<EventViewModel>(context,
-                                            listen: false)
-                                         .errorMessage);
-                              }
+                              Navigator.pushNamed(context, '/upcomingEvent');
                             });
                           },
                         ),
