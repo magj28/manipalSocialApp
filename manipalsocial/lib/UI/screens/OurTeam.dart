@@ -20,7 +20,12 @@ class OurTeam extends StatelessWidget {
         children: [
           CustomCard(
             imageurl: "assets/images/person.png",
-            name: "Shubham Pathak",
+            name: "Anmol Malhotra",
+            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+          ),
+          CustomCard(
+            imageurl: "assets/images/person.png",
+            name: "Omkar Masur",
             info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
           ),
           CustomCard(
@@ -30,12 +35,32 @@ class OurTeam extends StatelessWidget {
           ),
           CustomCard(
             imageurl: "assets/images/person.png",
-            name: "Shubham Pathak",
+            name: "Abhinav Anand",
             info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
           ),
           CustomCard(
             imageurl: "assets/images/person.png",
-            name: "Shubham Pathak",
+            name: "Akhil Kala",
+            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+          ),
+          CustomCard(
+            imageurl: "assets/images/person.png",
+            name: "Garvit Arora",
+            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+          ),
+          CustomCard(
+            imageurl: "assets/images/person.png",
+            name: "Hemangi Jain",
+            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+          ),
+          CustomCard(
+            imageurl: "assets/images/person.png",
+            name: "Sanjna Siboo",
+            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+          ),
+          CustomCard(
+            imageurl: "assets/images/person.png",
+            name: "Tinku Choudhary",
             info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
           ),
         ],
