@@ -1,28 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:manipalsocial/UI/widgets/alertDialog.dart';
-import 'package:manipalsocial/logic/viewModels/chatViewModel.dart';
 import 'package:manipalsocial/logic/viewModels/userViewModel.dart';
 import 'package:provider/provider.dart';
 
 class ChatCard extends StatelessWidget {
-  const ChatCard({
-    Key key,
-    @required this.mongooseID,
-    @required this.name,
-    @required this.email,
-    @required this.message,
-  }) : super(key: key);
+  const ChatCard(
+      {Key key,
+      @required this.mongooseID,
+      @required this.name,
+      @required this.email,
+      @required this.message,
+      this.deleteChat})
+      : super(key: key);
 
   final String name;
   final String email;
   final String message;
   final String mongooseID;
+  final Function deleteChat;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
+      margin: EdgeInsets.only(left: 30, right: 30, top: 5, bottom: 5),
       decoration: BoxDecoration(
         color: (Provider.of<UserViewModel>(context, listen: false).user.email !=
                 email)
@@ -31,16 +31,17 @@ class ChatCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(left: 10),
+                padding: const EdgeInsets.only(left: 10, top: 5),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(name,
                         style: TextStyle(
@@ -67,7 +68,7 @@ class ChatCard extends StatelessWidget {
               (Provider.of<UserViewModel>(context, listen: false).user.email !=
                       email)
                   ? Container()
-                  : PopUpMenu(mongooseID),
+                  : PopUpMenu(mongooseID, deleteChat),
             ],
           ),
           Padding(
@@ -87,18 +88,19 @@ class ChatCard extends StatelessWidget {
   }
 }
 
-//Popup menu to edit and delete experiences
-enum options { delete, edit }
+//Popup menu to edit and delete chats
+enum options { delete }
 
 class PopUpMenu extends StatefulWidget {
   final chatID;
-  PopUpMenu(this.chatID);
+  final Function deleteChat;
+  PopUpMenu(this.chatID, this.deleteChat);
   @override
   _PopUpMenuState createState() => _PopUpMenuState();
 }
 
 class _PopUpMenuState extends State<PopUpMenu> {
-  options selection = options.edit;
+  options selection = options.delete;
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<options>(
@@ -108,27 +110,14 @@ class _PopUpMenuState extends State<PopUpMenu> {
           selection = result;
         });
         if (result == options.delete) {
-          //delete the experience
-          String headers =
-              Provider.of<UserViewModel>(context, listen: false).headers;
-          bool success =
-              await Provider.of<ChatViewModel>(context, listen: false)
-                  .deleteChat(headers, widget.chatID);
-          if (!success) {
-            showMyDialog(
-                context,
-                "Error",
-                "Some network error occured. Could not make request.",
-                Provider.of<ChatViewModel>(context, listen: false)
-                    .errorMessage);
-          }
+          widget.deleteChat(widget.chatID);
         }
       },
       itemBuilder: (BuildContext context) => <PopupMenuEntry<options>>[
         const PopupMenuItem<options>(
           value: options.delete,
           child: Text(
-            'Delete post',
+            'Delete chat',
             style: TextStyle(color: Color(0xff1B90CE)),
           ),
         ),

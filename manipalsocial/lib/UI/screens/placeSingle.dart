@@ -49,7 +49,8 @@ class PlaceSingleScreen extends StatelessWidget {
                 children: [
                   PinkButton(
                     buttonText: 'Experiences',
-                    onPress: () async{
+                    onPress: () async {
+                      Navigator.pushNamed(context, '/experience');
                       String headers =
                           Provider.of<UserViewModel>(context, listen: false)
                               .headers;
@@ -57,17 +58,17 @@ class PlaceSingleScreen extends StatelessWidget {
                           Provider.of<PlaceViewModel>(context, listen: false)
                               .singlePlace
                               .mongooseId;
-                      bool success =
-                      await Provider.of<ExperienceViewModel>(context, listen: false)
+                      bool success = await Provider.of<ExperienceViewModel>(
+                              context,
+                              listen: false)
                           .getExperiences(headers, placeID);
-                      if (success == true) {
-                        Navigator.pushNamed(context, '/experience');
-                      } else {
+                      if (!success) {
                         showMyDialog(
                             context,
                             'Oops!',
                             'Looks like something went wrong.',
-                            Provider.of<ExperienceViewModel>(context, listen: false)
+                            Provider.of<ExperienceViewModel>(context,
+                                    listen: false)
                                 .errorMessage);
                       }
                     },

@@ -57,7 +57,7 @@ class AddExperienceScreen extends StatelessWidget {
           ),
           PinkButton(
             buttonText: 'Submit',
-            onPress: ()async {
+            onPress: () async {
               //finding headers and place if to send in the request
               String headers =
                   Provider.of<UserViewModel>(context, listen: false).headers;
@@ -67,29 +67,27 @@ class AddExperienceScreen extends StatelessWidget {
               Operation op = exp.operation;
               if (op == Operation.Create) {
                 //create a new experience
-                bool success= await exp.createExperience(headers, placeID, expController.text);
-                if(!success)
-                {
+                bool success = await exp.createExperience(
+                    headers, placeID, expController.text);
+                if (!success) {
                   showMyDialog(
                       context,
                       'Oops!',
                       'Looks like something went wrong.',
-                      Provider.of<ExperienceViewModel>(context,
-                          listen: false)
+                      Provider.of<ExperienceViewModel>(context, listen: false)
                           .errorMessage);
                 }
               } else {
                 //Update experience
                 String expID = exp.expID;
-                bool success= await exp.editExperience(headers, expID, placeID, expController.text);
-                if(!success)
-                {
+                bool success = await exp.editExperience(
+                    headers, expID, placeID, expController.text);
+                if (!success) {
                   showMyDialog(
                       context,
                       'Oops!',
                       'Looks like something went wrong.',
-                      Provider.of<ExperienceViewModel>(context,
-                          listen: false)
+                      Provider.of<ExperienceViewModel>(context, listen: false)
                           .errorMessage);
                 }
               }

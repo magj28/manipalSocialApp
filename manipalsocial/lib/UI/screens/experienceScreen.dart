@@ -28,17 +28,11 @@ class ExperienceScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Top posts',
+                'See what people think about this place',
                 style: TextStyle(
                     color: Color(0xff1B90CE),
-                    fontSize: 17.0,
+                    fontSize: 15.0,
                     fontWeight: FontWeight.bold),
-              ),
-              Divider(
-                thickness: 1,
-                color: Color(0xffFC2E7E),
-                indent: 50,
-                endIndent: 50,
               ),
               exps.isFetchingData //to show a progress indicator while its fetching data
                   ? Center(child: CircularProgressIndicator())
@@ -46,46 +40,16 @@ class ExperienceScreen extends StatelessWidget {
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
-                      itemCount: exps.mostLikedExp.length,
+                      itemCount: exps.exps.length,
                       itemBuilder: (context, index) {
                         return ExperienceCard(
-                          name: exps.mostLikedExp[index].user.name,
-                          email: exps.mostLikedExp[index].user.email,
-                          date: exps.mostLikedExp[index].createdAt,
-                          likes: exps.mostLikedExp[index].likes.toString(),
-                          experience: exps.mostLikedExp[index].experience,
-                          expID: exps.mostLikedExp[index].mongooseId,
-                        );
-                      },
-                    ),
-              Text(
-                'Other posts',
-                style: TextStyle(
-                    color: Color(0xff1B90CE),
-                    fontSize: 17.0,
-                    fontWeight: FontWeight.bold),
-              ),
-              Divider(
-                thickness: 1,
-                color: Color(0xffFC2E7E),
-                indent: 50,
-                endIndent: 50,
-              ),
-              exps.isFetchingData //to show a progress indicator while its fetching data
-                  ? Center(child: CircularProgressIndicator())
-                  : ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: exps.dateSortedExp.length,
-                      itemBuilder: (context, index) {
-                        return ExperienceCard(
-                          name: exps.dateSortedExp[index].user.name,
-                          email: exps.dateSortedExp[index].user.email,
-                          date: exps.dateSortedExp[index].createdAt,
-                          likes: exps.dateSortedExp[index].likes.toString(),
-                          experience: exps.dateSortedExp[index].experience,
-                          expID: exps.dateSortedExp[index].mongooseId,
-                        );
+                            name: exps.exps[index].user.name,
+                            email: exps.exps[index].user.email,
+                            date: exps.exps[index].createdAt,
+                            likes: exps.exps[index].likes.toString(),
+                            experience: exps.exps[index].experience,
+                            expID: exps.exps[index].mongooseId,
+                            likedBy: exps.exps[index].likedBy);
                       },
                     ),
             ],

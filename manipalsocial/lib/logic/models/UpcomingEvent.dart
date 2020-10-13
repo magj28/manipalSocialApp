@@ -24,7 +24,7 @@ class ComingEvent {
   ComingEvent.fromJson(Map<dynamic, dynamic> json)
       : mongooseId = json['_id'],
         name = json['name'],
-        when = timeConvert(json["when"]),
+        when = dateAndTimeConvert(json["when"]),
         where = json['where'],
         imageUrl = json['imageUrl'],
         what = json['what'],

@@ -21,20 +21,13 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.4.1"
-=======
     version: "2.5.0-nullsafety.1"
->>>>>>> flutter updated
   boolean_selector:
     dependency: transitive
     description:
       name: boolean_selector
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "2.0.0"
-=======
     version: "2.1.0-nullsafety.1"
   characters:
     dependency: transitive
@@ -43,7 +36,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0-nullsafety.3"
->>>>>>> flutter updated
   charcode:
     dependency: transitive
     description:
@@ -64,11 +56,7 @@ packages:
       name: collection
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "1.14.12"
-=======
     version: "1.15.0-nullsafety.3"
->>>>>>> flutter updated
   convert:
     dependency: transitive
     description:
@@ -115,11 +103,7 @@ packages:
       name: flutter_launcher_icons
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "0.8.0"
-=======
     version: "0.8.1"
->>>>>>> flutter updated
   flutter_secure_storage:
     dependency: "direct main"
     description:
@@ -159,11 +143,7 @@ packages:
       name: matcher
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "0.12.6"
-=======
     version: "0.12.10-nullsafety.1"
->>>>>>> flutter updated
   meta:
     dependency: transitive
     description:
@@ -198,11 +178,7 @@ packages:
       name: petitparser
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "3.0.4"
-=======
     version: "3.1.0"
->>>>>>> flutter updated
   provider:
     dependency: "direct main"
     description:
@@ -235,11 +211,7 @@ packages:
       name: stack_trace
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "1.9.3"
-=======
     version: "1.10.0-nullsafety.1"
->>>>>>> flutter updated
   stream_channel:
     dependency: transitive
     description:
@@ -267,22 +239,14 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "0.2.16"
-=======
     version: "0.2.19-nullsafety.2"
->>>>>>> flutter updated
   typed_data:
     dependency: transitive
     description:
       name: typed_data
       url: "https://pub.dartlang.org"
     source: hosted
-<<<<<<< HEAD
-    version: "1.1.6"
-=======
     version: "1.3.0-nullsafety.3"
->>>>>>> flutter updated
   vector_math:
     dependency: transitive
     description:
@@ -312,9 +276,5 @@ packages:
     source: hosted
     version: "2.2.1"
 sdks:
-<<<<<<< HEAD
-  dart: ">=2.7.0 <3.0.0"
-=======
   dart: ">=2.10.0-110 <2.11.0"
->>>>>>> flutter updated
   flutter: ">=1.16.0"

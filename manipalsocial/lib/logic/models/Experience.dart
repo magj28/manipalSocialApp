@@ -8,6 +8,7 @@ class Experience {
   String placeID;
   String createdAt;
   int likes;
+  List<dynamic> likedBy;
 
   Experience({
     this.mongooseId,
@@ -24,5 +25,6 @@ class Experience {
         user = User.fromJson(json['user_id']),
         placeID = json['place_id'],
         createdAt = dateConvert(json['createdAt']),
-        likes = json["likes"];
+        likes = json["likes"],
+        likedBy = json["likedBy"];
 }

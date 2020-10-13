@@ -19,6 +19,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     channel = IOWebSocketChannel.connect('wss://manipal-social.herokuapp.com');
+    // channel = IOWebSocketChannel.connect('wss://5c71e184bad9.ngrok.io');
     _chatController = TextEditingController();
     super.initState();
   }
@@ -33,7 +34,7 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         bottomNavigationBar: BottomAppBar(
-          color:Color(0xff131132),
+          color: Color(0xff131132),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -52,14 +53,16 @@ class _ChatScreenState extends State<ChatScreen> {
                   onPressed: () {
                     if (_chatController.text.isNotEmpty) {
                       var user =
-                          Provider.of<UserViewModel>(context, listen: false).user;
+                          Provider.of<UserViewModel>(context, listen: false)
+                              .user;
                       var newMessage = {
+                        'type': 'chat',
                         'name': user.name,
                         'email': user.email,
                         'message': _chatController.text,
                         'jwtToken':
-                        Provider.of<UserViewModel>(context, listen: false)
-                            .jwtToken
+                            Provider.of<UserViewModel>(context, listen: false)
+                                .jwtToken
                       };
                       String jsonNewMsg = json.encode(newMessage);
                       channel.sink.add(jsonNewMsg);
@@ -98,10 +101,28 @@ class _ChatScreenState extends State<ChatScreen> {
                     //   style: TextStyle(color: Colors.white),
                     // );
                     return ChatCard(
-                        mongooseID: reversedchats[index]['_id'],
-                        name: reversedchats[index]['name'],
-                        email: reversedchats[index]['email'],
-                        message: reversedchats[index]['message']);
+                      mongooseID: reversedchats[index]['_id'],
+                      name: reversedchats[index]['name'],
+                      email: reversedchats[index]['email'],
+                      message: reversedchats[index]['message'],
+                      deleteChat: (chatID) {
+                        //deleting the chats
+                        print('delete chat');
+                        print(chatID);
+                        var user =
+                            Provider.of<UserViewModel>(context, listen: false)
+                                .user;
+                        var deleteChat = {
+                          'type': 'deleteChat',
+                          'chatID': chatID,
+                          'jwtToken':
+                              Provider.of<UserViewModel>(context, listen: false)
+                                  .jwtToken
+                        };
+                        String jsonNewMsg = json.encode(deleteChat);
+                        channel.sink.add(jsonNewMsg);
+                      },
+                    );
                   },
                 );
               } else {

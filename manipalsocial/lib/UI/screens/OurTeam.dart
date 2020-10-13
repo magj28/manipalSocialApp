@@ -5,63 +5,60 @@ class OurTeam extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xff131132),
-        appBar: AppBar(
-          title: Text(
-            'Our Team',
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Color(0xffFC2E7E)),
-          ),
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: Color(0xff131132),
+      backgroundColor: Color(0xff131132),
+      appBar: AppBar(
+        title: Text(
+          'Our Team',
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Color(0xffFC2E7E)),
         ),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Color(0xff131132),
+      ),
       body: ListView(
         children: [
           CustomCard(
             imageurl: "assets/images/person.png",
-            name: "Anmol Malhotra",
-            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-          ),
-          CustomCard(
-            imageurl: "assets/images/person.png",
-            name: "Omkar Masur",
-            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-          ),
-          CustomCard(
-            imageurl: "assets/images/person.png",
             name: "Shubham Pathak",
-            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+            info:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
           ),
           CustomCard(
             imageurl: "assets/images/person.png",
             name: "Abhinav Anand",
-            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+            info:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
           ),
           CustomCard(
             imageurl: "assets/images/person.png",
             name: "Akhil Kala",
-            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+            info:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
           ),
           CustomCard(
             imageurl: "assets/images/person.png",
             name: "Garvit Arora",
-            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+            info:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
           ),
           CustomCard(
             imageurl: "assets/images/person.png",
             name: "Hemangi Jain",
-            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+            info:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
           ),
           CustomCard(
             imageurl: "assets/images/person.png",
             name: "Sanjna Siboo",
-            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+            info:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
           ),
           CustomCard(
             imageurl: "assets/images/person.png",
             name: "Tinku Choudhary",
-            info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+            info:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
           ),
         ],
       ),

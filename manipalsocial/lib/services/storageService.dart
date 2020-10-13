@@ -4,6 +4,7 @@ class StorageService {
   final storage = new FlutterSecureStorage();
   Future<void> storeJwtTokenAndUser(token, user) async {
     await storage.write(key: "token", value: token);
+    await storage.write(key: "_id", value: user['_id']);
     await storage.write(key: "name", value: user['name']);
     await storage.write(key: "email", value: user['email']);
     await storage.write(key: "phoneNumber", value: user['phoneNumber']);

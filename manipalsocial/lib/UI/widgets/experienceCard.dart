@@ -13,7 +13,8 @@ class ExperienceCard extends StatelessWidget {
       @required this.date,
       @required this.likes,
       @required this.experience,
-      @required this.expID})
+      @required this.expID,
+      @required this.likedBy})
       : super(key: key);
 
   final String name;
@@ -22,6 +23,7 @@ class ExperienceCard extends StatelessWidget {
   final String likes;
   final String experience;
   final String expID;
+  final likedBy;
 
   @override
   Widget build(BuildContext context) {
@@ -76,10 +78,7 @@ class ExperienceCard extends StatelessWidget {
                           email)
                       ? Container()
                       : PopUpMenu(expID),
-                  LikeButton(
-                    likes: likes,
-                    expID: expID,
-                  ),
+                  LikeButton(likes: likes, expID: expID, likedBy: likedBy),
                 ],
               )
             ],
@@ -103,14 +102,36 @@ class ExperienceCard extends StatelessWidget {
 class LikeButton extends StatefulWidget {
   final likes;
   final expID;
-  const LikeButton({Key key, this.likes, this.expID}) : super(key: key);
+  final likedBy;
+  const LikeButton({Key key, this.likes, this.expID, this.likedBy})
+      : super(key: key);
 
   @override
   _LikeButtonState createState() => _LikeButtonState();
 }
 
 class _LikeButtonState extends State<LikeButton> {
-  bool liked = false;
+  bool liked;
+
+  bool isLikedByUser() {
+    for (int i = 0; i < widget.likedBy.length; i++) {
+      if (widget.likedBy[i].toString() ==
+          Provider.of<UserViewModel>(context, listen: false)
+              .user
+              .mongooseID
+              .toString()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  @override
+  void initState() {
+    liked = isLikedByUser();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -133,19 +154,20 @@ class _LikeButtonState extends State<LikeButton> {
                 type = 'like';
               }
             });
+
             String headers =
                 Provider.of<UserViewModel>(context, listen: false).headers;
-            bool success= await Provider.of<ExperienceViewModel>(context, listen: false).updateLikes(headers, widget.expID, type);
-            if(!success)
-              {
-                showMyDialog(
-                    context,
-                    'Oops!',
-                    'Looks like something went wrong.',
-                    Provider.of<ExperienceViewModel>(context,
-                        listen: false)
-                        .errorMessage);
-              }
+            bool success =
+                await Provider.of<ExperienceViewModel>(context, listen: false)
+                    .updateLikes(headers, widget.expID, type);
+            if (!success) {
+              showMyDialog(
+                  context,
+                  'Oops!',
+                  'Looks like something went wrong.',
+                  Provider.of<ExperienceViewModel>(context, listen: false)
+                      .errorMessage);
+            }
           },
         ),
         Text(
@@ -184,36 +206,25 @@ class _PopUpMenuState extends State<PopUpMenu> {
           //delete the experience
           String headers =
               Provider.of<UserViewModel>(context, listen: false).headers;
-          bool success= await Provider.of<ExperienceViewModel>(context, listen: false)
-              .deleteExperience(headers, widget.expID);
-          if(!success)
-          {
+          bool success =
+              await Provider.of<ExperienceViewModel>(context, listen: false)
+                  .deleteExperience(headers, widget.expID);
+          if (!success) {
             showMyDialog(
                 context,
                 'Oops!',
                 'Looks like something went wrong.',
-                Provider.of<ExperienceViewModel>(context,
-                    listen: false)
+                Provider.of<ExperienceViewModel>(context, listen: false)
                     .errorMessage);
           }
         } else if (result == options.edit) {
           //edit the experience by changing the operation type
           Provider.of<ExperienceViewModel>(context, listen: false)
               .setOperation(Operation.Edit);
-          bool success= await Provider.of<ExperienceViewModel>(context, listen: false)
+          Provider.of<ExperienceViewModel>(context, listen: false)
               .setExpID(widget.expID);
-          if(success == true){
-            Navigator.pushNamed(context, '/addExperience');
-          }
-          else {
-            showMyDialog(
-                context,
-                'Oops!',
-                'Looks like something went wrong.',
-                Provider.of<ExperienceViewModel>(context,
-                    listen: false)
-                    .errorMessage);
-          }
+
+          Navigator.pushNamed(context, '/addExperience');
         }
       },
       itemBuilder: (BuildContext context) => <PopupMenuEntry<options>>[

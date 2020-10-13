@@ -1,4 +1,5 @@
 class User {
+  String mongooseID;
   String name;
   String email;
   String phoneNumber;
@@ -7,5 +8,6 @@ class User {
   User.fromJson(Map<dynamic, dynamic> json)
       : email = json['email'],
         name = json["name"],
-        phoneNumber = json['phoneNumber'];
+        phoneNumber = json['phoneNumber'],
+        mongooseID = json['_id'];
 }

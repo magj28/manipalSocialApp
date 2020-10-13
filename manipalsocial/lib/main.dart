@@ -15,7 +15,6 @@ import 'package:manipalsocial/UI/screens/signUp.dart';
 import 'package:manipalsocial/UI/screens/splashScreen.dart';
 import 'package:manipalsocial/UI/screens/upcomingEvent.dart';
 import 'package:manipalsocial/logic/viewModels/cabShareViewModel.dart';
-import 'package:manipalsocial/logic/viewModels/chatViewModel.dart';
 import 'package:manipalsocial/logic/viewModels/experienceViewModel.dart';
 import 'package:manipalsocial/logic/viewModels/placeViewModel.dart';
 import 'package:manipalsocial/logic/viewModels/userViewModel.dart';
@@ -39,9 +38,6 @@ void main() {
     ),
     ChangeNotifierProvider.value(
       value: CabViewModel(),
-    ),
-    ChangeNotifierProvider.value(
-      value: ChatViewModel(),
     ),
   ], child: MyApp()));
 }
@@ -73,8 +69,8 @@ class MyApp extends StatelessWidget {
         '/chat': (context) => ChatScreen(),
         '/upcomingEvent': (context) => UpcomingEvent(),
         '/event': (context) => EventScreen(),
-        '/contact':(context) => ContactUs(),
-        '/team':(context) => OurTeam(),
+        '/contact': (context) => ContactUs(),
+        '/team': (context) => OurTeam(),
       },
     );
   }

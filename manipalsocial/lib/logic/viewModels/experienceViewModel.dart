@@ -10,8 +10,7 @@ class ExperienceViewModel with ChangeNotifier {
   WebApi api = WebApi();
   UserViewModel user = UserViewModel();
 
-  List<Experience> _mostLikedExp = List<Experience>();
-  List<Experience> _dateSortedExp = List<Experience>();
+  List<Experience> _exps = List<Experience>();
   bool _isFetchingData = false;
   String _errorMessage;
   Operation _operation = Operation.Create;
@@ -20,8 +19,7 @@ class ExperienceViewModel with ChangeNotifier {
   //getters
   bool get isFetchingData => _isFetchingData;
   String get errorMessage => _errorMessage;
-  List<Experience> get mostLikedExp => _mostLikedExp;
-  List<Experience> get dateSortedExp => _dateSortedExp;
+  List<Experience> get exps => _exps;
   Operation get operation => _operation;
   String get expID => _expID;
 
@@ -48,54 +46,39 @@ class ExperienceViewModel with ChangeNotifier {
 
   setExperiences(value) {
     //clearing the previously filled data so that data doesn't get repeated
-    _mostLikedExp.clear();
-    _dateSortedExp.clear();
+    _exps.clear();
 
-    //initializing arrays of places
-    var mostLikedExp = value['mostLikedExp'];
-    var dateSortedExp = value['dateSortedExp'];
+    var Exps = value['Exps'];
 
     //adding in list of experience objects
-    for (int i = 0; i < mostLikedExp.length; i++) {
-      _mostLikedExp.add(Experience.fromJson(mostLikedExp[i]));
+    for (int i = 0; i < Exps.length; i++) {
+      _exps.add(Experience.fromJson(Exps[i]));
     }
-
-    for (int i = 0; i < dateSortedExp.length; i++) {
-      _dateSortedExp.add(Experience.fromJson(dateSortedExp[i]));
-    }
-
     setFetchingData(false);
 
     notifyListeners();
   }
 
   setNewExperiences(value) {
-    _dateSortedExp.insert(0, Experience.fromJson(value['newExp']));
+    _exps.insert(0, Experience.fromJson(value['newExp']));
     notifyListeners();
   }
 
   setUpdateLikes(expID, type) {
     final indexOfExp =
-        _dateSortedExp.indexWhere((element) => element.mongooseId == expID);
-    final indexOfLikedExp =
-        _mostLikedExp.indexWhere((element) => element.mongooseId == expID);
+        _exps.indexWhere((element) => element.mongooseId == expID);
     if (type == "like") {
-      _dateSortedExp[indexOfExp].likes++;
-      _mostLikedExp[indexOfLikedExp].likes++;
-      print(_dateSortedExp[indexOfExp].likes);
+      _exps[indexOfExp].likes++;
+      print(_exps[indexOfExp].likes);
     } else {
-      _dateSortedExp[indexOfExp].likes--;
-      _mostLikedExp[indexOfLikedExp].likes--;
-      print(_dateSortedExp[indexOfExp].likes);
+      _exps[indexOfExp].likes--;
+      print(_exps[indexOfExp].likes);
     }
     notifyListeners();
   }
 
   setDeletedExp(value) {
-    _mostLikedExp.removeWhere((element) {
-      return element.mongooseId == value;
-    });
-    _dateSortedExp.removeWhere((element) {
+    _exps.removeWhere((element) {
       return element.mongooseId == value;
     });
     notifyListeners();

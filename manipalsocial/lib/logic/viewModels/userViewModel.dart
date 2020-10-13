@@ -67,6 +67,7 @@ class UserViewModel with ChangeNotifier {
       setJwtToken(jwtTokenAndUser['token']);
 
       var user = {
+        '_id': jwtTokenAndUser['_id'],
         'name': jwtTokenAndUser['name'],
         'email': jwtTokenAndUser['email'],
         'phoneNumber': jwtTokenAndUser['phoneNumber']

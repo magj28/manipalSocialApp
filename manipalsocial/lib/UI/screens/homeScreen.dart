@@ -35,9 +35,8 @@ class HomeScreen extends StatelessWidget {
                           'assets/images/promoCard.png',
                           'No upcoming events!',
                           'There are no upcoming events in manipal.',
-                          "Don't worry we'll keep you updated.", () {
-                          Navigator.pushNamed(context, '/upcomingEvent');
-                        }
+                          "Don't worry we'll keep you updated.",
+                          () {}
                           // () async {
                           //   String headers = Provider.of<UserViewModel>(context,
                           //           listen: false)
@@ -69,9 +68,9 @@ class HomeScreen extends StatelessWidget {
                                 event.upcomingevents[index].name,
                                 event.upcomingevents[index].where,
                                 event.upcomingevents[index].when, () {
+                              Navigator.pushNamed(context, '/upcomingEvent');
                               event.setSingleUpcomingEvent(
                                   event.upcomingevents[index]);
-                              Navigator.pushNamed(context, '/upcomingEvent');
                             });
                           },
                         ),
@@ -102,15 +101,14 @@ class HomeScreen extends StatelessWidget {
                   'Places to Visit',
                   'assets/images/places.png',
                   () async {
+                    Navigator.pushNamed(context, '/place');
                     String headers =
                         Provider.of<UserViewModel>(context, listen: false)
                             .headers;
                     bool success = await Provider.of<PlaceViewModel>(context,
                             listen: false)
                         .getPlaces(headers);
-                    if (success == true) {
-                      Navigator.pushNamed(context, '/place');
-                    } else {
+                    if (!success) {
                       showMyDialog(
                           context,
                           'Oops!',
@@ -133,6 +131,7 @@ class HomeScreen extends StatelessWidget {
                 }),
                 HomeScreenCard('Events of Manipal', 'assets/images/event.png',
                     () async {
+                  Navigator.pushNamed(context, '/event');
                   String headers =
                       Provider.of<UserViewModel>(context, listen: false)
                           .headers;
@@ -141,9 +140,7 @@ class HomeScreen extends StatelessWidget {
                           .getEvents(headers);
                   Provider.of<EventViewModel>(context, listen: false)
                       .getUpcomingEvents(headers);
-                  if (success == true) {
-                    Navigator.pushNamed(context, '/event');
-                  } else {
+                  if (!success) {
                     showMyDialog(
                         context,
                         'Oops!',

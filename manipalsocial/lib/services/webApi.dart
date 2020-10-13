@@ -3,6 +3,7 @@ import 'dart:convert';
 
 class WebApi {
   final String url = "https://manipal-social.herokuapp.com/";
+  // final String url = "https://5c71e184bad9.ngrok.io/";
   var networkError = {
     'success': false,
     'error': "Network Error.",
@@ -119,8 +120,7 @@ class WebApi {
     if (response.statusCode == 200 && responseStatus == "success") {
       var expData = {
         'success': true,
-        'mostLikedExp': json.decode(response.body)['data']['mostLikedExp'],
-        'dateSortedExp': json.decode(response.body)['data']['dateSortedExp'],
+        'Exps': json.decode(response.body)['data']['Exps'],
         'message': json.decode(response.body)['message']
       };
       return expData;
