@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:manipalsocial/UI/widgets/alertDialog.dart';
 import 'package:manipalsocial/UI/widgets/infoCard.dart';
 import 'package:manipalsocial/UI/widgets/pinkButton.dart';
 import 'package:manipalsocial/logic/viewModels/cabShareViewModel.dart';
@@ -169,8 +170,17 @@ class _CabShareScreenState extends State<CabShareScreen> {
                     String headers =
                         Provider.of<UserViewModel>(context, listen: false)
                             .headers;
-                    await cabViewModel.getCabShares(
-                        headers, to, from, selectedDate.toIso8601String());
+                    bool success= await cabViewModel.getCabShares(
+                        headers, to, from, selectedDate.toIso8601String(),listen: false);
+                    if (!success) {
+                      showMyDialog(
+                          context,
+                          'Oops!',
+                          'Looks like something went wrong.',
+                          Provider.of<CabViewModel>(context,
+                              listen: false)
+                              .errorMessage);
+                    }
                   }),
               SizedBox(
                 height: 10,

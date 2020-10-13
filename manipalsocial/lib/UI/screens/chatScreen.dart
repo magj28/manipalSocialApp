@@ -32,39 +32,42 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomSheet: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Expanded(
-              child: CustomTextField(
-                controller: _chatController,
-                hintMessage: 'Type here...',
-                isPassword: false,
-              ),
-            ),
-            IconButton(
-                icon: Icon(
-                  Icons.send,
-                  color: Color(0xffFC2E7E),
+        bottomNavigationBar: BottomAppBar(
+          color:Color(0xff131132),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                child: CustomTextField(
+                  controller: _chatController,
+                  hintMessage: 'Type here...',
+                  isPassword: false,
                 ),
-                onPressed: () {
-                  if (_chatController.text.isNotEmpty) {
-                    var user =
-                        Provider.of<UserViewModel>(context, listen: false).user;
-                    var newMessage = {
-                      'name': user.name,
-                      'email': user.email,
-                      'message': _chatController.text,
-                      'jwtToken':
-                          Provider.of<UserViewModel>(context, listen: false)
-                              .jwtToken
-                    };
-                    String jsonNewMsg = json.encode(newMessage);
-                    channel.sink.add(jsonNewMsg);
-                    _chatController.text = "";
-                  }
-                }),
-          ],
+              ),
+              IconButton(
+                  icon: Icon(
+                    Icons.send,
+                    color: Color(0xffFC2E7E),
+                  ),
+                  onPressed: () {
+                    if (_chatController.text.isNotEmpty) {
+                      var user =
+                          Provider.of<UserViewModel>(context, listen: false).user;
+                      var newMessage = {
+                        'name': user.name,
+                        'email': user.email,
+                        'message': _chatController.text,
+                        'jwtToken':
+                        Provider.of<UserViewModel>(context, listen: false)
+                            .jwtToken
+                      };
+                      String jsonNewMsg = json.encode(newMessage);
+                      channel.sink.add(jsonNewMsg);
+                      _chatController.text = "";
+                    }
+                  }),
+            ],
+          ),
         ),
         backgroundColor: Color(0xff131132),
         appBar: AppBar(

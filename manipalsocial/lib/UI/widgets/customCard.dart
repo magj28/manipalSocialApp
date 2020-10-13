@@ -4,7 +4,9 @@ import 'package:flutter/cupertino.dart';
 class CustomCard extends StatelessWidget {
   final String imageurl, name, info;
   final Function onTap;
+
   CustomCard({this.imageurl, this.info, this.name, this.onTap});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

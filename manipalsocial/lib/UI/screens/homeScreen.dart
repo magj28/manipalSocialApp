@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manipalsocial/UI/widgets/alertDialog.dart';
 import 'package:manipalsocial/UI/widgets/homeScreenCard.dart';
 import 'package:manipalsocial/UI/widgets/pinkButton.dart';
 import 'package:manipalsocial/UI/widgets/promoCard.dart';
@@ -34,8 +35,30 @@ class HomeScreen extends StatelessWidget {
                           'assets/images/promoCard.png',
                           'No upcoming events!',
                           'There are no upcoming events in manipal.',
-                          "Don't worry we'll keep you updated.",
-                          () {})
+                          "Don't worry we'll keep you updated.", () {
+                          Navigator.pushNamed(context, '/upcomingEvent');
+                        }
+                          // () async {
+                          //   String headers = Provider.of<UserViewModel>(context,
+                          //           listen: false)
+                          //       .headers;
+                          //   bool success = await Provider.of<EventViewModel>(
+                          //           context,
+                          //           listen: false)
+                          //       .getUpcomingEvents(headers);
+                          //   if (success == true) {
+                          //     Navigator.pushNamed(context, '/upcomingEvent');
+                          //   } else {
+                          //     showMyDialog(
+                          //         context,
+                          //         'Oops!',
+                          //         'Looks like something went wrong.',
+                          //         Provider.of<EventViewModel>(context,
+                          //                 listen: false)
+                          //             .errorMessage);
+                          //   }
+                          // },
+                          )
                       : ListView.builder(
                           // shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
@@ -75,15 +98,28 @@ class HomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                HomeScreenCard('Places to Visit', 'assets/images/places.png',
-                    () {
-                  String headers =
-                      Provider.of<UserViewModel>(context, listen: false)
-                          .headers;
-                  Provider.of<PlaceViewModel>(context, listen: false)
-                      .getPlaces(headers);
-                  Navigator.pushNamed(context, '/place');
-                }),
+                HomeScreenCard(
+                  'Places to Visit',
+                  'assets/images/places.png',
+                  () async {
+                    String headers =
+                        Provider.of<UserViewModel>(context, listen: false)
+                            .headers;
+                    bool success = await Provider.of<PlaceViewModel>(context,
+                            listen: false)
+                        .getPlaces(headers);
+                    if (success == true) {
+                      Navigator.pushNamed(context, '/place');
+                    } else {
+                      showMyDialog(
+                          context,
+                          'Oops!',
+                          'Looks like something went wrong.',
+                          Provider.of<PlaceViewModel>(context, listen: false)
+                              .errorMessage);
+                    }
+                  },
+                ),
                 HomeScreenCard('Cab Share', 'assets/images/cab.png', () {
                   Navigator.pushNamed(context, '/cabShare');
                 }),
@@ -96,15 +132,25 @@ class HomeScreen extends StatelessWidget {
                   Navigator.pushNamed(context, '/chat');
                 }),
                 HomeScreenCard('Events of Manipal', 'assets/images/event.png',
-                    () {
+                    () async {
                   String headers =
                       Provider.of<UserViewModel>(context, listen: false)
                           .headers;
-                  Provider.of<EventViewModel>(context, listen: false)
-                      .getEvents(headers);
+                  bool success =
+                      await Provider.of<EventViewModel>(context, listen: false)
+                          .getEvents(headers);
                   Provider.of<EventViewModel>(context, listen: false)
                       .getUpcomingEvents(headers);
-                  Navigator.pushNamed(context, '/event');
+                  if (success == true) {
+                    Navigator.pushNamed(context, '/event');
+                  } else {
+                    showMyDialog(
+                        context,
+                        'Oops!',
+                        'Looks like something went wrong.',
+                        Provider.of<EventViewModel>(context, listen: false)
+                            .errorMessage);
+                  }
                 }),
               ],
             ),
@@ -139,16 +185,20 @@ class HomeScreen extends StatelessWidget {
             ),
             PinkButton(
               buttonText: 'Contact Us',
-              onPress: () {},
+              onPress: () {
+                Navigator.pushNamed(context, '/contact');
+              },
             ),
             PinkButton(
               buttonText: ' Our Team ',
-              onPress: () {},
+              onPress: () {
+                Navigator.pushNamed(context, '/team');
+              },
             ),
-            PinkButton(
-              buttonText: ' About Us ',
-              onPress: () {},
-            ),
+            // PinkButton(
+            //   buttonText: ' About Us ',
+            //   onPress: () {},
+            // ),
             SizedBox(
               height: 20.0,
             ),
@@ -205,12 +255,120 @@ class DrawerScreen extends StatelessWidget {
             endIndent: 50,
           ),
           ListTile(
-            title: Text(
-              'Logout',
-              style: TextStyle(
-                  color: Color(0xff1B90CE),
-                  fontSize: 17.0,
-                  fontWeight: FontWeight.bold),
+            title: Center(
+              child: Text(
+                'Places To Visit',
+                style: TextStyle(
+                    color: Color(0xff1B90CE),
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            onTap: () async {
+              String headers =
+                  Provider.of<UserViewModel>(context, listen: false).headers;
+              bool success =
+                  await Provider.of<PlaceViewModel>(context, listen: false)
+                      .getPlaces(headers);
+              if (success == true) {
+                Navigator.pushNamed(context, '/place');
+              } else {
+                showMyDialog(
+                    context,
+                    'Oops!',
+                    'Looks like something went wrong.',
+                    Provider.of<PlaceViewModel>(context, listen: false)
+                        .errorMessage);
+              }
+            },
+          ),
+          ListTile(
+            title: Center(
+              child: Text(
+                'Events at Manipal',
+                style: TextStyle(
+                    color: Color(0xff1B90CE),
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            onTap: () async {
+              String headers =
+                  Provider.of<UserViewModel>(context, listen: false).headers;
+              bool success =
+                  await Provider.of<EventViewModel>(context, listen: false)
+                      .getEvents(headers);
+              Provider.of<EventViewModel>(context, listen: false)
+                  .getUpcomingEvents(headers);
+              if (success == true) {
+                Navigator.pushNamed(context, '/event');
+              } else {
+                showMyDialog(
+                    context,
+                    'Oops!',
+                    'Looks like something went wrong.',
+                    Provider.of<EventViewModel>(context, listen: false)
+                        .errorMessage);
+              }
+            },
+          ),
+          ListTile(
+            title: Center(
+              child: Text(
+                'Community Chat',
+                style: TextStyle(
+                    color: Color(0xff1B90CE),
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, '/chat');
+            },
+          ),
+          ListTile(
+            title: Center(
+              child: Text(
+                'Cab Sharing',
+                style: TextStyle(
+                    color: Color(0xff1B90CE),
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, '/cabShare');
+            },
+          ),
+          Divider(
+            thickness: 1,
+            color: Color(0xffFC2E7E),
+            indent: 50,
+            endIndent: 50,
+          ),
+          ListTile(
+            title: Center(
+              child: Text(
+                'Contact Us',
+                style: TextStyle(
+                    color: Color(0xff1B90CE),
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            onTap: () {
+              Navigator.pushNamed(context, '/contact');
+            },
+          ),
+          ListTile(
+            title: Center(
+              child: Text(
+                'Logout',
+                style: TextStyle(
+                    color: Color(0xff1B90CE),
+                    fontSize: 17.0,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
             onTap: () {
               Provider.of<UserViewModel>(context, listen: false).logOut();
