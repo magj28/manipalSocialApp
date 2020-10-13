@@ -42,8 +42,7 @@ class ExperienceCard extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 2),
                 child: CircleAvatar(
                   radius: 35,
-                  backgroundImage: NetworkImage(
-                      'https://istemanipal.com/media/DPs/Shubham_Pathak.jpeg'),
+                  backgroundImage: AssetImage('assets/images/userAvatar.png'),
                 ),
               ),
               Column(
