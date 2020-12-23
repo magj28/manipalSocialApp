@@ -1,16 +1,13 @@
-# manipalsocial
+##### 2. You can write your experience with that place and also read other people's experiences and it also has a like feature to like posts.
+##### 3. Cab share option to find people who with same cabs at same time and routes,
+##### 4. Community chat for the entire manipal who're using this app to chat and make friends.
+##### 5. All the events of manipal will be displayed in the app with their details like when and where so that users of this app remain don't miss any chance to experience this beautiful place.
 
-A new Flutter application.
+### Apk link : https://drive.google.com/file/d/1l6rfjEE9dh2xaLa_Zmq7hcRJLe0nQHCE/view?usp=sharing
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Technical Features:
+  - ##### Entire app made using flutter from ground app using provider for state management solution.
+  - ##### Chatting uses websockets to communicate with the server. 
+  - ##### A full authentication flow of user register and login build from scratch using JWT tokens sent from the server. JWT token is later stored in shared preference with security mechanism.
+  - ##### MVVM design patter is used to architecture the app.
+  - ##### App connected with a REST API service made in express and mongoDB. 
