@@ -26,37 +26,13 @@ class OurTeam extends StatelessWidget {
           ),
           CustomCard(
             imageurl: "assets/images/person.png",
-            name: "Abhinav Anand",
+            name: "Yash Maurya",
             info:
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
           ),
           CustomCard(
             imageurl: "assets/images/person.png",
-            name: "Akhil Kala",
-            info:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-          ),
-          CustomCard(
-            imageurl: "assets/images/person.png",
-            name: "Garvit Arora",
-            info:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-          ),
-          CustomCard(
-            imageurl: "assets/images/person.png",
-            name: "Hemangi Jain",
-            info:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-          ),
-          CustomCard(
-            imageurl: "assets/images/person.png",
-            name: "Sanjna Siboo",
-            info:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
-          ),
-          CustomCard(
-            imageurl: "assets/images/person.png",
-            name: "Tinku Choudhary",
+            name: "Ayush Jha2",
             info:
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
           ),
@@ -65,3 +41,40 @@ class OurTeam extends StatelessWidget {
     );
   }
 }
+
+//          CustomCard(
+//             imageurl: "assets/images/person.png",
+//             name: "Abhinav Anand",
+//             info:
+//                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+//           ),
+//           CustomCard(
+//             imageurl: "assets/images/person.png",
+//             name: "Akhil Kala",
+//             info:
+//                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+//           ),
+//           CustomCard(
+//             imageurl: "assets/images/person.png",
+//             name: "Garvit Arora",
+//             info:
+//                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+//           ),
+//           CustomCard(
+//             imageurl: "assets/images/person.png",
+//             name: "Hemangi Jain",
+//             info:
+//                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+//           ),
+//           CustomCard(
+//             imageurl: "assets/images/person.png",
+//             name: "Sanjna Siboo",
+//             info:
+//                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+//           ),
+//           CustomCard(
+//             imageurl: "assets/images/person.png",
+//             name: "Tinku Choudhary",
+//             info:
+//                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+//           ),

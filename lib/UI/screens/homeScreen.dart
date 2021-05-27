@@ -138,8 +138,9 @@ class HomeScreen extends StatelessWidget {
                   bool success =
                       await Provider.of<EventViewModel>(context, listen: false)
                           .getEvents(headers);
-                  Provider.of<EventViewModel>(context, listen: false)
-                      .getUpcomingEvents(headers);
+                  success =
+                      await Provider.of<EventViewModel>(context, listen: false)
+                          .getUpcomingEvents(headers);
                   if (!success) {
                     showMyDialog(
                         context,

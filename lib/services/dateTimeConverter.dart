@@ -16,7 +16,7 @@ String timeConvert(dateTimeData) {
 String dateAndTimeConvert(dateTimeData) {
   print(dateTimeData);
   DateTime dateTime = DateTime.parse(dateTimeData).toLocal();
-  print(dateTime.toLocal());
+  // print(dateTime.toLocal());
   int hrs = dateTime.hour;
   int min = dateTime.minute;
   int day = dateTime.day;

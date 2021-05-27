@@ -6,7 +6,7 @@
 ##### 4. Community chat for the entire manipal who're using this app to chat and make friends.
 ##### 5. All the events of manipal will be displayed in the app with their details like when and where so that users of this app remain don't miss any chance to experience this beautiful place.
 
-### Apk link : https://drive.google.com/file/d/1l6rfjEE9dh2xaLa_Zmq7hcRJLe0nQHCE/view?usp=sharing
+### Apk link : https://drive.google.com/file/d/1tOA-08PBPmxWg65OnltzWvaHGcGZAjOW/view?usp=sharing
 
 # Technical Features:
   - ##### Entire app made using flutter from ground app using provider for state management solution.

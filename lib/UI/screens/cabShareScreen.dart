@@ -167,19 +167,26 @@ class _CabShareScreenState extends State<CabShareScreen> {
                     print(to);
                     print(from);
                     print(selectedDate);
-                    String headers =
-                        Provider.of<UserViewModel>(context, listen: false)
-                            .headers;
-                    bool success= await cabViewModel.getCabShares(
-                        headers, to, from, selectedDate.toIso8601String(),listen: false);
-                    if (!success) {
+                    if (selectedDate == null) {
                       showMyDialog(
                           context,
-                          'Oops!',
-                          'Looks like something went wrong.',
-                          Provider.of<CabViewModel>(context,
-                              listen: false)
-                              .errorMessage);
+                          'Sorry!',
+                          "Didn't enter the date and time.",
+                          'Please pick a date and time at which you want to share the cab.');
+                    } else {
+                      String headers =
+                          Provider.of<UserViewModel>(context, listen: false)
+                              .headers;
+                      bool success = await cabViewModel.getCabShares(
+                          headers, to, from, selectedDate.toIso8601String());
+                      if (!success) {
+                        showMyDialog(
+                            context,
+                            'Oops!',
+                            'Looks like something went wrong.',
+                            Provider.of<CabViewModel>(context, listen: false)
+                                .errorMessage);
+                      }
                     }
                   }),
               SizedBox(
@@ -236,10 +243,10 @@ class _CabShareScreenState extends State<CabShareScreen> {
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 children: <Widget>[
-                  InfoCard('Sumit Reddy', 'phone', '+91 8130180208'),
-                  InfoCard('Prateek hiremath', 'phone', '+91 8130180208'),
-                  InfoCard('Sanjay', 'phone', '+91 8130180208'),
-                  InfoCard('Akhram', 'phone', '+91 8130180208'),
+                  InfoCard('Some random name', 'phone', '+91 8130180208'),
+                  InfoCard('cab driver 2', 'phone', '+91 8130180208'),
+                  InfoCard('cab driver 3', 'phone', '+91 8130180208'),
+                  InfoCard('some other random name', 'phone', '+91 8130180208'),
                 ],
               )
             ],

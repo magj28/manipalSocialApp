@@ -2,7 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class WebApi {
-  final String url = "https://manipal-social.herokuapp.com/";
+  var url = "https://manipal-social.herokuapp.com/";
   // final String url = "https://5c71e184bad9.ngrok.io/";
   var networkError = {
     'success': false,
@@ -16,7 +16,7 @@ class WebApi {
     final apiUrl = url + 'user/register';
     var response, responseStatus;
     try {
-      response = await http.post(apiUrl, body: {
+      response = await http.post(Uri.parse(apiUrl), body: {
         'name': name,
         'email': email,
         'phoneNumber': phNumber,
@@ -51,7 +51,7 @@ class WebApi {
     final apiUrl = url + 'user/login';
     var response, responseStatus;
     try {
-      response = await http.post(apiUrl, body: {
+      response = await http.post(Uri.parse(apiUrl), body: {
         'email': email,
         'password': password,
       });
@@ -82,7 +82,7 @@ class WebApi {
     final apiUrl = url + 'places/list';
     var response, responseStatus;
     try {
-      response = await http.get(apiUrl, headers: {'Authorization': headers});
+      response = await http.get(Uri.parse(apiUrl), headers: {'Authorization': headers});
       responseStatus = json.decode(response.body)['status'];
     } catch (e) {
       print(e);
@@ -111,7 +111,7 @@ class WebApi {
     final apiUrl = url + 'experiences/list/$placeID';
     var response, responseStatus;
     try {
-      response = await http.get(apiUrl, headers: {'Authorization': headers});
+      response = await http.get(Uri.parse(apiUrl), headers: {'Authorization': headers});
       responseStatus = json.decode(response.body)['status'];
     } catch (e) {
       print(e);
@@ -138,7 +138,7 @@ class WebApi {
     final apiUrl = url + 'experiences/newExp/$placeID';
     var response, responseStatus;
     try {
-      response = await http.post(apiUrl, headers: {
+      response = await http.post(Uri.parse(apiUrl), headers: {
         'Authorization': headers
       }, body: {
         'experience': experience,
@@ -169,7 +169,7 @@ class WebApi {
     final apiUrl = url + 'experiences/editExp/$expID';
     var response, responseStatus;
     try {
-      response = await http.patch(apiUrl, headers: {
+      response = await http.patch(Uri.parse(apiUrl), headers: {
         'Authorization': headers
       }, body: {
         'experience': experience,
@@ -200,7 +200,7 @@ class WebApi {
     final apiUrl = url + 'experiences/updateLikes/$expID?type=$type';
     var response, responseStatus;
     try {
-      response = await http.patch(apiUrl, headers: {'Authorization': headers});
+      response = await http.patch(Uri.parse(apiUrl), headers: {'Authorization': headers});
       responseStatus = json.decode(response.body)['status'];
     } catch (e) {
       print(e);
@@ -227,7 +227,7 @@ class WebApi {
     final apiUrl = url + 'experiences/deleteExp/$expID';
     var response, responseStatus;
     try {
-      response = await http.delete(apiUrl, headers: {'Authorization': headers});
+      response = await http.delete(Uri.parse(apiUrl), headers: {'Authorization': headers});
       responseStatus = json.decode(response.body)['status'];
     } catch (e) {
       print(e);
@@ -253,7 +253,7 @@ class WebApi {
     final apiUrl = url + 'chats/deleteChat/$chatID';
     var response, responseStatus;
     try {
-      response = await http.delete(apiUrl, headers: {'Authorization': headers});
+      response = await http.delete(Uri.parse(apiUrl), headers: {'Authorization': headers});
       responseStatus = json.decode(response.body)['status'];
     } catch (e) {
       print(e);
@@ -279,7 +279,7 @@ class WebApi {
     final apiUrl = url + 'event/list';
     var response, responseStatus;
     try {
-      response = await http.get(apiUrl, headers: {'Authorization': headers});
+      response = await http.get(Uri.parse(apiUrl), headers: {'Authorization': headers});
       responseStatus = json.decode(response.body)['status'];
     } catch (e) {
       print(e);
@@ -306,7 +306,7 @@ class WebApi {
     final apiUrl = url + 'event/upcomingEvents';
     var response, responseStatus;
     try {
-      response = await http.get(apiUrl, headers: {'Authorization': headers});
+      response = await http.get(Uri.parse(apiUrl), headers: {'Authorization': headers});
       responseStatus = json.decode(response.body)['status'];
     } catch (e) {
       print(e);
@@ -333,7 +333,7 @@ class WebApi {
     final apiUrl = url + 'cabs/getCabShares';
     var response, responseStatus;
     try {
-      response = await http.post(apiUrl,
+      response = await http.post(Uri.parse(apiUrl),
           headers: {'Authorization': headers},
           body: {'to': to, 'from': from, 'dateTime': dateTime});
       responseStatus = json.decode(response.body)['status'];

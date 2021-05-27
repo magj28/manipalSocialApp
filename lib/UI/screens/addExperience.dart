@@ -15,7 +15,7 @@ class AddExperienceScreen extends StatelessWidget {
     final singlePlace = Provider.of<PlaceViewModel>(context, listen: false);
     final exp = Provider.of<ExperienceViewModel>(context, listen: false);
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       backgroundColor: Color(0xff131132),
       appBar: AppBar(
         backgroundColor: Color(0xff131132),
